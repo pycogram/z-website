@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Docs from "./docs-content";
 export const metadata: Metadata = {
   alternates: {
-    canonical: "https://www.agentropic.org/docs",
+    canonical: "https://www.zeroicai.org/docs",
   },
 };
 
