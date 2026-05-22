@@ -17,7 +17,7 @@ const examples: Example[] = [
     title: 'Hierarchy Pattern',
     description: 'Corporate organization with CEO delegating to departments and employees.',
     pattern: 'Hierarchy',
-    code: `use agentropic_patterns::hierarchy::*;
+    code: `use zeroicai_patterns::hierarchy::*;
 
     // Define the organizational hierarchy
     let org = Hierarchy::new()
@@ -37,7 +37,7 @@ const examples: Example[] = [
     title: 'Swarm Pattern',
     description: 'Drone coordination with emergent behavior and local communication.',
     pattern: 'Swarm',
-    code: `use agentropic_patterns::swarm::*;
+    code: `use zeroicai_patterns::swarm::*;
 
     // Create a swarm of drone agents
     let swarm = Swarm::new(SwarmConfig {
@@ -60,7 +60,7 @@ const examples: Example[] = [
     title: 'Market Pattern',
     description: 'Auction system with buyers, sellers, and price discovery.',
     pattern: 'Market',
-    code: `use agentropic_patterns::market::*;
+    code: `use zeroicai_patterns::market::*;
 
     let market = Market::new(AuctionRules::english());
 
@@ -77,7 +77,7 @@ const examples: Example[] = [
     title: 'Coalition Pattern',
     description: 'Dynamic team formation based on capabilities and goals.',
     pattern: 'Coalition',
-    code: `use agentropic_patterns::coalition::*;
+    code: `use zeroicai_patterns::coalition::*;
 
     // Agents with different capabilities
     let agents = vec![
@@ -99,7 +99,7 @@ const examples: Example[] = [
     title: 'Blackboard Pattern',
     description: 'Shared knowledge space for collaborative problem solving.',
     pattern: 'Blackboard',
-    code: `use agentropic_patterns::blackboard::*;
+    code: `use zeroicai_patterns::blackboard::*;
 
     let blackboard = Blackboard::new();
 
@@ -173,7 +173,7 @@ export default function Examples() {
                     </div>
                     <div className="flex gap-2">
                       <a
-                        href={`https://github.com/agentropic/examples/${example.pattern.toLowerCase()}`}
+                        href={`https://github.com/zeroicai/examples/${example.pattern.toLowerCase()}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-muted-foreground hover:text-foreground transition-colors"
