@@ -16,11 +16,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   // Basic Metadata
   title: {
-    default: "Agentropic - Agent-Oriented Programming in Rust",
-    template: "%s | Agentropic",
+    default: "ZeroicAI - Agent-Oriented Programming in Rust",
+    template: "%s | ZeroicAI",
   },
   description:
-    "Build intelligent, autonomous multi-agent systems with Agentropic. A comprehensive Rust framework featuring BDI cognitive architecture, FIPA-compliant messaging, swarm intelligence, and production-ready deployment for blockchain, trading, IoT, and enterprise automation.",
+    "Build intelligent, autonomous multi-agent systems with ZeroicAI. A comprehensive Rust framework featuring BDI cognitive architecture, FIPA-compliant messaging, swarm intelligence, and production-ready deployment for blockchain, trading, IoT, and enterprise automation.",
 
   // Keywords for SEO
   keywords: [
@@ -46,18 +46,18 @@ export const metadata: Metadata = {
   ],
 
   // Author and Creator
-  authors: [{ name: "Agentropic Contributors" }],
-  creator: "Agentropic Team",
-  publisher: "Agentropic",
-  metadataBase: new URL("https://www.agentropic.org/"),
+  authors: [{ name: "ZeroicAI Contributors" }],
+  creator: "ZeroicAI Team",
+  publisher: "ZeroicAI",
+  metadataBase: new URL("https://www.zeroicai.org/"),
 
   // Open Graph (for social media sharing including Telegram)
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.agentropic.org/",
-    siteName: "Agentropic",
-    title: "Agentropic - Agent-Oriented Programming in Rust",
+    url: "https://www.zeroicai.org/",
+    siteName: "ZeroicAI",
+    title: "ZeroicAI - Agent-Oriented Programming in Rust",
     description:
       "Build intelligent, autonomous multi-agent systems with Rust. Production-ready framework for blockchain, trading, IoT, and enterprise automation.",
     images: [
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
         url: "/assets/ag-logo.png",
         width: 1200,
         height: 630,
-        alt: "Agentropic - Multi-Agent Systems Framework",
+        alt: "ZeroicAI - Multi-Agent Systems Framework",
       },
     ],
   },
@@ -73,12 +73,12 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: "summary_large_image",
-    title: "Agentropic - Agent-Oriented Programming in Rust",
+    title: "ZeroicAI - Agent-Oriented Programming in Rust",
     description:
       "Build intelligent, autonomous multi-agent systems with Rust. Production-ready framework for blockchain, trading, IoT, and enterprise.",
-    images: ["https://www.agentropic.org/assets/twitter-card.png"],
-    creator: "@agentropic",
-    site: "@agentropic",
+    images: ["https://www.zeroicai.org/assets/twitter-card.png"],
+    creator: "@zeroicai",
+    site: "@zeroicai",
   },
 
   // Favicon and Icons
@@ -129,11 +129,11 @@ export default function RootLayout({
       <head>
         {/* Google-specific meta tags */}
         <meta name="google-site-verification" content="1syAefYvq2BcaVmSLHptF6h9o3cARASFf4lQ4mo-ts8" />
-        <meta name="application-name" content="Agentropic" />
+        <meta name="application-name" content="ZeroicAI" />
         <meta name="theme-color" content="#000000" />
         
         {/* Telegram-specific tag (not covered by Next.js metadata export) */}
-        <meta property="telegram:channel" content="@agentropic" />
+        <meta property="telegram:channel" content="@zeroicai" />
         
         {/* JSON-LD Structured Data for Google */}
         <script
@@ -142,14 +142,14 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              "name": "Agentropic",
+              "name": "ZeroicAI",
               "applicationCategory": "DeveloperApplication",
               "operatingSystem": "Cross-platform",
-              "description": "Build intelligent, autonomous multi-agent systems with Agentropic. A comprehensive Rust framework featuring BDI cognitive architecture, FIPA-compliant messaging, swarm intelligence, and production-ready deployment for blockchain, trading, IoT, and enterprise automation.",
-              "url": "https://www.agentropic.org/",
+              "description": "Build intelligent, autonomous multi-agent systems with ZeroicAI. A comprehensive Rust framework featuring BDI cognitive architecture, FIPA-compliant messaging, swarm intelligence, and production-ready deployment for blockchain, trading, IoT, and enterprise automation.",
+              "url": "https://www.zeroicai.org/",
               "author": {
                 "@type": "Organization",
-                "name": "Agentropic Team"
+                "name": "ZeroicAI Team"
               },
               "offers": {
                 "@type": "Offer",
@@ -158,8 +158,8 @@ export default function RootLayout({
               },
               "programmingLanguage": "Rust",
               "keywords": "Rust, multi-agent systems, agent-oriented programming, autonomous agents, BDI architecture, swarm intelligence, blockchain agents",
-              "image": "https://www.agentropic.org/assets/ag-logo.png",
-              "screenshot": "https://www.agentropic.org/assets/ag-logo.png"
+              "image": "https://www.zeroicai.org/assets/ag-logo.png",
+              "screenshot": "https://www.zeroicai.org/assets/ag-logo.png"
             })
           }}
         />
@@ -170,13 +170,13 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "Agentropic",
-              "url": "https://www.agentropic.org/",
-              "logo": "https://www.agentropic.org/assets/ag-logo.png",
+              "name": "ZeroicAI",
+              "url": "https://www.zeroicai.org/",
+              "logo": "https://www.zeroicai.org/assets/ag-logo.png",
               "description": "Open-source Rust framework for building intelligent multi-agent systems",
               "sameAs": [
                 "https://x.com/tm401z",
-                "https://github.com/agentropic"
+                "https://github.com/zeroicai"
               ]
             })
           }}
@@ -185,7 +185,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider defaultTheme="dark" storageKey="agentropic-theme">
+        <ThemeProvider defaultTheme="dark" storageKey="zeroicai-theme">
           {children}
         </ThemeProvider>
       </body>
