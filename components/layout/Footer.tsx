@@ -10,13 +10,13 @@ const footerLinks = {
     { label: 'Examples', href: '/examples' },
   ],
   crates: [
-    { label: 'agentropic-core', href: '/crates/#' },
-    { label: 'agentropic-messaging', href: '/crates/#' },
-    { label: 'agentropic-cognition', href: '/crates/#' },
-    { label: 'agentropic-patterns', href: '/crates/#' },
+    { label: 'z-core', href: '/crates/#' },
+    { label: 'z-messaging', href: '/crates/#' },
+    { label: 'z-cognition', href: '/crates/#' },
+    { label: 'z-patterns', href: '/crates/#' },
   ],
   community: [
-    { label: 'GitHub', href: 'https://github.com/agentropic', external: true },
+    { label: 'GitHub', href: 'https://github.com/zeroicai', external: true },
     { label: 'Twitter / X', href: 'https://x.com/tm401z', external: true },
     { label: 'Contributing', href: '/#' },
     { label: 'Code of Conduct', href: '/#' },
@@ -32,20 +32,20 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Image 
-                src="/assets/logo.png" 
-                alt="Agentropic"         
+                src="/assets/favicon.ico" 
+                alt="ZeroicAI"         
                 width={32} 
                 height={32} 
                 className="[filter:drop-shadow(0_0_1px_gray)_drop-shadow(0_0_1px_gray)] dark:[filter:none]"  
               />
-              <span className="font-bold text-lg">Agentropic</span>
+              <span className="font-bold text-lg">ZeroicAI</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
               Agent-Oriented Programming for Rust. Build intelligent multi-agent systems with production-ready tools.
             </p>
             <div className="flex gap-3">
               <a
-                href="https://github.com/agentropic"
+                href="https://github.com/zeroicai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
@@ -139,7 +139,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Agentropic. Licensed under MIT / Apache-2.0.
+            © {new Date().getFullYear()} ZeroicAI. Licensed under MIT / Apache-2.0.
           </p>
           <div className="flex gap-6 text-sm text-muted-foreground">
             <Link href="/privacy" className="hover:text-foreground transition-colors">
