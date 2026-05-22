@@ -1,12 +1,12 @@
-# Agentropic Website
+# ZeroicAI Website
 
-The official documentation and landing page for Agentropic - a comprehensive Rust framework for building intelligent, autonomous multi-agent systems.
+The official documentation and landing page for ZeroicAI - a comprehensive Rust framework for building intelligent, autonomous multi-agent systems.
 
 ## 🎯 Overview
 
-This website serves as the primary resource for developers exploring Agentropic, featuring:
+This website serves as the primary resource for developers exploring ZeroicAI, featuring:
 
-- **Landing Page** - Introduction to agent-oriented programming with Agentropic
+- **Landing Page** - Introduction to agent-oriented programming with ZeroicAI
 - **Documentation** - Comprehensive guides, tutorials, and API references
 - **Examples** - Interactive code samples and real-world use cases
 - **Crate Documentation** - Detailed docs for all 10 crates
@@ -25,18 +25,18 @@ This website serves as the primary resource for developers exploring Agentropic,
 
 ## 📁 Project Structure
 ```
-agentropic-website/
+zeroicai-website/
 ├── app/
 │   ├── layout.tsx              # Root layout
 │   ├── page.tsx                # Homepage
 │   ├── docs/
 │   │   ├── page.tsx            # Docs homepage
 │   │   ├── getting-started/    # Getting started guide
-│   │   ├── core/               # agentropic-core docs
-│   │   ├── messaging/          # agentropic-messaging docs
-│   │   ├── cognition/          # agentropic-cognition docs
-│   │   ├── patterns/           # agentropic-patterns docs
-│   │   ├── runtime/            # agentropic-runtime docs
+│   │   ├── core/               # z-core docs
+│   │   ├── messaging/          # z-messaging docs
+│   │   ├── cognition/          # z-cognition docs
+│   │   ├── patterns/           # z-patterns docs
+│   │   ├── runtime/            # z-runtime docs
 │   │   └── ...
 │   ├── examples/
 │   │   └── page.tsx            # Code examples
@@ -69,7 +69,7 @@ agentropic-website/
 │       ├── messaging/
 │       └── ...
 ├── public/
-│   ├── logo.svg                # Agentropic logo
+│   ├── logo.svg                # ZeroicAI logo
 │   ├── images/
 │   └── favicons/
 ├── styles/
@@ -90,8 +90,8 @@ agentropic-website/
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/agentropic/agentropic-website.git
-cd agentropic-website
+git clone https://github.com/zeroicai/zeroicai-website.git
+cd zeroicai-website
 
 # Install dependencies
 npm install
@@ -145,7 +145,7 @@ Use the `CodeBlock` component:
 ```tsx
 <CodeBlock language="rust">
 {`
-use agentropic::prelude::*;
+use zeroicai::prelude::*;
 
 fn main() {
     let agent = Agent::new("example");
@@ -211,10 +211,10 @@ module.exports = {
 Each page includes proper meta tags:
 ```tsx
 export const metadata = {
-  title: 'Agentropic - Agent-Oriented Programming in Rust',
+  title: 'ZeroicAI - Agent-Oriented Programming in Rust',
   description: 'Build intelligent, autonomous multi-agent systems...',
   openGraph: {
-    title: 'Agentropic',
+    title: 'ZeroicAI',
     description: '...',
     images: ['/og-image.png'],
   },
@@ -258,7 +258,7 @@ vercel --prod
 
 Create `.env.local`:
 ```env
-NEXT_PUBLIC_SITE_URL=https://agentropic.dev
+NEXT_PUBLIC_SITE_URL=https://zeroicai.dev
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX (optional)
 ```
 
@@ -269,11 +269,11 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX (optional)
 - **Home** - Landing page with hero, features, examples
 - **Getting Started** - Installation, quick start, first agent
 - **Documentation Hub** - Overview of all crates
-- **agentropic-core** - Agent primitives, identity, lifecycle
-- **agentropic-messaging** - Communication protocols, FIPA ACL
-- **agentropic-cognition** - BDI architecture, planning, reasoning
-- **agentropic-patterns** - 8 organizational patterns
-- **agentropic-runtime** - Execution, scheduling, supervision
+- **z-core** - Agent primitives, identity, lifecycle
+- **z-messaging** - Communication protocols, FIPA ACL
+- **z-cognition** - BDI architecture, planning, reasoning
+- **z-patterns** - 8 organizational patterns
+- **z-runtime** - Execution, scheduling, supervision
 - **Examples** - Real-world code samples
 - **Use Cases** - Blockchain, trading, IoT, enterprise
 - **Roadmap** - Project status and future plans
@@ -284,7 +284,7 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX (optional)
 ### Homepage Sections
 
 1. **Hero** - Tagline + CTA (Get Started, View Docs)
-2. **What is Agentropic** - Brief introduction
+2. **What is ZeroicAI** - Brief introduction
 3. **Key Features** - 4-6 feature cards
 4. **Code Example** - Show vs tell (before/after)
 5. **Use Cases** - Industry applications
@@ -301,16 +301,16 @@ Getting Started
 └── Core Concepts
 
 Crates
-├── agentropic-core
-├── agentropic-messaging
-├── agentropic-cognition
-├── agentropic-patterns
-├── agentropic-runtime
-├── agentropic-deploy
-├── agentropic-tools
-├── agentropic (facade)
-├── agentropic-examples
-└── agentropic-docs
+├── z-core
+├── z-messaging
+├── z-cognition
+├── z-patterns
+├── z-runtime
+├── zeroicai-deploy
+├── zeroicai-tools
+├── zeroicai (facade)
+├── z-examples
+└── z-docs
 
 Guides
 ├── Building Your First Agent
@@ -331,9 +331,9 @@ API Reference
 
 ## 🔗 External Links
 
-- **GitHub**: https://github.com/agentropic
-- **Crates.io**: https://crates.io/crates/agentropic
-- **Docs.rs**: https://docs.rs/agentropic
+- **GitHub**: https://github.com/zeroicai
+- **Crates.io**: https://crates.io/crates/zeroicai
+- **Docs.rs**: https://docs.rs/zeroicai
 
 ## 🤝 Contributing
 
@@ -350,7 +350,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 This website code is licensed under MIT.
 
-The Agentropic framework is licensed under MIT/Apache-2.0.
+The ZeroicAI framework is licensed under MIT/Apache-2.0.
 
 ---
 
@@ -370,4 +370,4 @@ npm run check-links   # Validate internal links (if script exists)
 
 ---
 
-*Built with Rusted-Mind for the Agentropic community*
+*Built with Rusted-Mind for the ZeroicAI community*
