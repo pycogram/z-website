@@ -15,12 +15,15 @@ export function FeatureCard({ icon: Icon, title, description, delay = 0 }: Featu
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
       viewport={{ once: true }}
-      className="feature-card"
+      className="holo-frame feature-card group"
     >
-      <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-        <Icon className="h-6 w-6 text-primary" />
+      <div className="h-10 w-10 flex items-center justify-center mb-4"
+        style={{ border: '1px solid rgba(136,228,248,0.25)', background: 'rgba(136,228,248,0.06)' }}>
+        <Icon className="h-5 w-5 text-[var(--cyan)]" style={{ filter: 'drop-shadow(0 0 4px var(--cyan))' }} />
       </div>
-      <h3 className="font-semibold text-lg mb-2">{title}</h3>
+      <h3 className="font-display text-sm font-bold uppercase tracking-wider mb-2 text-foreground group-hover:text-[var(--cyan)] transition-colors">
+        {title}
+      </h3>
       <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
     </motion.div>
   );

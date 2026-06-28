@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { GlobalEffects } from "@/components/effects/GlobalEffects";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   // Basic Metadata
@@ -182,10 +172,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="scanlines antialiased">
         <ThemeProvider defaultTheme="dark" storageKey="zeroicai-theme">
+          <GlobalEffects />
           {children}
         </ThemeProvider>
       </body>

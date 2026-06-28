@@ -1,32 +1,28 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation'; 
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, ExternalLink } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { Menu, X, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 const navItems = [
   { label: 'Products', href: '/products' },
   { label: 'Docs', href: '/docs' },
-  { label: 'Crates', href: '/crates' }, 
+  { label: 'Crates', href: '/crates' },
   { label: 'Examples', href: '/examples' },
   { label: 'Use Cases', href: '/use-cases' },
-  { label: 'RM', href: '/roadmap' }
+  { label: 'Roadmap', href: '/roadmap' },
 ];
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const pathname = usePathname(); 
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -40,71 +36,69 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-background/80 backdrop-blur-lg border-b shadow-sm'
+          ? 'border-b border-[var(--cyan)]/20 backdrop-blur-lg'
           : 'bg-transparent'
       }`}
+      style={isScrolled ? { background: 'rgba(5, 6, 18, 0.85)' } : {}}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-1.5 hover:opacity-80 transition-opacity">
-              <span className="border border-gray-200">
-                <Image 
-                  src="/assets/logo-x.png" 
-                  alt="ZeroicAI" 
-                  width={24}  
-                  height={24} 
-                  className="[filter:drop-shadow(0_0_1px_gray)_drop-shadow(0_0_1px_gray)] dark:[filter:none]" 
-                />
-              </span>
-            <span className="font-bold text-xl tracking-tight">ZeroicAI</span>
+
+          {/* Brand */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <Image
+              src="/assets/ag-logo.png"
+              alt="ZeroicAI"
+              width={28}
+              height={28}
+              className="transition-opacity opacity-80 group-hover:opacity-100"
+              style={{ filter: 'invert(1) brightness(0.92)' }}
+            />
+            <span className="font-display text-sm font-bold uppercase tracking-widest text-foreground group-hover:text-[var(--cyan)] transition-colors">
+              ZeroicAI
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`nav-link px-2 lg:px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive(item.href) ? 'active' : ''
-                }`}
+                className={`nav-link px-3 py-2 ${isActive(item.href) ? 'active' : ''}`}
               >
                 {item.label}
               </Link>
             ))}
           </nav>
 
-          {/* Right side actions */}
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            
-            <a href="https://github.com/zeroicai"
+          {/* Right actions */}
+          <div className="flex items-center gap-3">
+            <a
+              href="https://github.com/zeroicai"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex"
+              className="hidden md:flex items-center gap-1.5 font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground hover:text-[var(--cyan)] transition-colors"
+              style={{ letterSpacing: '0.12em' }}
             >
-              <Button variant="ghost" size="icon" aria-label="GitHub">
-                <Github className="h-5 w-5" />
-              </Button>
+              GitHub ↗
             </a>
 
-            <Link href="/chat" className="hidden md:block">
-              <Button variant="default" size="sm">
+            <Link href="/chat">
+              <span className="hidden md:inline-flex btn-cyber" style={{ padding: '0.5rem 1rem', fontSize: '0.6rem' }}>
                 Chat
-                <ExternalLink className="ml-1 h-3 w-3" />
-              </Button>
+                <ExternalLink className="h-3 w-3" />
+              </span>
             </Link>
 
-            {/* Mobile menu button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
+            {/* Mobile toggle */}
+            <button
+              className="md:hidden p-2 text-muted-foreground hover:text-[var(--cyan)] transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
+            </button>
           </div>
         </div>
       </div>
@@ -116,32 +110,32 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background border-b"
+            className="md:hidden border-t border-[var(--cyan)]/20"
+            style={{ background: 'rgba(5, 6, 18, 0.95)' }}
           >
-            <nav className="container mx-auto px-4 py-4 space-y-2">
+            <nav className="container mx-auto px-4 py-4 space-y-1">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`block px-4 py-2.5 font-display text-[0.65rem] uppercase tracking-widest transition-colors ${
                     isActive(item.href)
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                      ? 'text-[var(--cyan)]'
+                      : 'text-muted-foreground hover:text-[var(--cyan)]'
                   }`}
                 >
-                  {item.label}
+                  {isActive(item.href) ? '▸ ' : ''}{item.label}
                 </Link>
               ))}
-              <div className="flex items-center gap-2 pt-4 border-t">
-                
-                <a href="https://github.com/zeroicai"
+              <div className="pt-4 border-t border-[var(--cyan)]/10">
+                <a
+                  href="https://github.com/zeroicai"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="block px-4 py-2 font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground hover:text-[var(--cyan)] transition-colors"
                 >
-                  <Button variant="ghost" size="icon">
-                    <Github className="h-5 w-5" />
-                  </Button>
+                  GitHub ↗
                 </a>
               </div>
             </nav>
