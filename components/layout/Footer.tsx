@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Github, Twitter, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 
 const footerLinks = {
@@ -25,66 +24,62 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="border-t bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+    <footer
+      className="border-t border-[var(--cyan)]/15 mt-auto"
+      style={{ background: 'rgba(5, 6, 18, 0.9)' }}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <span className="border border-gray-200">
-                <Image 
-                  src="/assets/logo-x.png" 
-                  alt="ZeroicAI"         
-                  width={32} 
-                  height={32} 
-                  className="[filter:drop-shadow(0_0_1px_gray)_drop-shadow(0_0_1px_gray)] dark:[filter:none]"  
-                />
+            <Link href="/" className="flex items-center gap-3 mb-5 group w-fit">
+              <Image
+                src="/assets/ag-logo.png"
+                alt="ZeroicAI"
+                width={28}
+                height={28}
+                className="opacity-75 group-hover:opacity-100 transition-opacity"
+                style={{ filter: 'invert(1) brightness(0.92)' }}
+              />
+              <span className="font-display text-sm font-bold uppercase tracking-widest text-foreground group-hover:text-[var(--cyan)] transition-colors">
+                ZeroicAI
               </span>
-              <span className="font-bold text-lg">ZeroicAI</span>
             </Link>
-            <p className="text-sm text-muted-foreground mb-4">
-              Agent-Oriented Programming for Rust. Build intelligent multi-agent systems with production-ready tools.
+            <p className="text-xs text-muted-foreground leading-relaxed mb-5 max-w-[200px]">
+              Agent-Oriented Programming for Rust. Build intelligent multi-agent systems.
             </p>
-            <div className="flex gap-3">
+            <div className="flex gap-4">
               <a
                 href="https://github.com/zeroicai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="GitHub"
+                className="font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground hover:text-[var(--cyan)] transition-colors"
               >
-                <Github className="h-5 w-5" />
+                GitHub ↗
               </a>
               <a
                 href="https://x.com/tm401z"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Twitter / X"
+                className="font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground hover:text-[var(--cyan)] transition-colors"
               >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a
-                href="https://discord.gg/K3CcB6yUan"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Discord"
-              >
-                <MessageCircle className="h-5 w-5" />
+                X / Twitter ↗
               </a>
             </div>
           </div>
 
           {/* Documentation */}
           <div>
-            <h3 className="font-semibold mb-4 text-sm">Documentation</h3>
-            <ul className="space-y-2">
+            <h3 className="font-display text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[var(--cyan)] mb-4">
+              Documentation
+            </h3>
+            <ul className="space-y-2.5">
               {footerLinks.documentation.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-xs text-muted-foreground hover:text-[var(--cyan)] transition-colors font-mono"
                   >
                     {link.label}
                   </Link>
@@ -95,13 +90,15 @@ export function Footer() {
 
           {/* Crates */}
           <div>
-            <h3 className="font-semibold mb-4 text-sm">Crates</h3>
-            <ul className="space-y-2">
+            <h3 className="font-display text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[var(--cyan)] mb-4">
+              Crates
+            </h3>
+            <ul className="space-y-2.5">
               {footerLinks.crates.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors font-mono"
+                    className="text-xs text-muted-foreground hover:text-[var(--cyan)] transition-colors font-mono"
                   >
                     {link.label}
                   </Link>
@@ -112,8 +109,10 @@ export function Footer() {
 
           {/* Community */}
           <div>
-            <h3 className="font-semibold mb-4 text-sm">Community</h3>
-            <ul className="space-y-2">
+            <h3 className="font-display text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[var(--cyan)] mb-4">
+              Community
+            </h3>
+            <ul className="space-y-2.5">
               {footerLinks.community.map((link) => (
                 <li key={link.label}>
                   {link.external ? (
@@ -121,14 +120,14 @@ export function Footer() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-xs text-muted-foreground hover:text-[var(--cyan)] transition-colors font-mono"
                     >
-                      {link.label}
+                      {link.label} ↗
                     </a>
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-xs text-muted-foreground hover:text-[var(--cyan)] transition-colors font-mono"
                     >
                       {link.label}
                     </Link>
@@ -139,15 +138,18 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} ZeroicAI. Licensed under MIT / Apache-2.0.
+        {/* Bottom bar */}
+        <div
+          className="mt-12 pt-6 border-t border-[var(--cyan)]/10 flex flex-col sm:flex-row justify-between items-center gap-4"
+        >
+          <p className="terminal-text text-[0.6rem] uppercase tracking-widest opacity-50">
+            © {new Date().getFullYear()} ZeroicAI — MIT / Apache-2.0
           </p>
-          <div className="flex gap-6 text-sm text-muted-foreground">
-            <Link href="/privacy" className="hover:text-foreground transition-colors">
+          <div className="flex gap-6">
+            <Link href="/privacy" className="font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground hover:text-[var(--cyan)] transition-colors">
               Privacy
             </Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">
+            <Link href="/terms" className="font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground hover:text-[var(--cyan)] transition-colors">
               Terms
             </Link>
           </div>
