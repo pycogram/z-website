@@ -11,71 +11,68 @@ import {
   Shield,
   ArrowRight,
   Package,
-  Github,
-  CheckCircle2,
   Clock,
-  Copy, 
-  Check 
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Layout } from '@/components/layout/Layout';
 import { FeatureCard } from '@/components/FeatureCard';
 import { CodeBlock } from '@/components/CodeBlock';
-import { useState } from 'react';
+import { OccultGlyph } from '@/components/effects/OccultGlyph';
+import { EyeParticles } from '@/components/effects/EyeParticles';
+import { AgentTicker } from '@/components/effects/AgentTicker';
 
 const features = [
   {
     icon: Cpu,
     title: 'Agent Primitives',
-    description: 'Complete lifecycle management with type-safe agent definitions, state machines, and capability systems.',
+    description: 'Implement the Agent trait with four async methods — initialize, execute, shutdown, handle_message. UUID-based AgentId, AgentContext for messaging and logging, and AgentState lifecycle machine.',
   },
   {
     icon: MessageSquare,
-    title: 'Message Passing',
-    description: 'Async/await message protocols with Tokio. Type-safe communication between agents with serialization support.',
+    title: 'FIPA Messaging',
+    description: '11 FIPA performatives: Inform, Request, Query, Propose, Accept, Reject, Confirm, Disconfirm, Subscribe, CFP, Refuse. MessageBuilder API, typed Router, and bounded async Mailboxes.',
   },
   {
     icon: Brain,
     title: 'BDI Architecture',
-    description: 'Beliefs, Desires, Intentions cognitive model. Plan libraries, goal reasoning, and deliberation cycles.',
+    description: 'Full Beliefs-Desires-Intentions model. BeliefBase with certainty scoring, forward-chaining ReasoningEngine, STRIPS-style Planner, UtilityFunction, Goal types, and IntentionStack.',
   },
   {
     icon: Network,
-    title: 'Organizational Patterns',
-    description: '8+ patterns including hierarchy, swarm, market, coalition, holarchy, federation, and blackboard.',
+    title: '8 Organizational Patterns',
+    description: 'Blackboard, Swarm (Flocking/Foraging/Consensus), Federation (weighted voting), Hierarchy (delegation), Team (Leader/Coordinator/Executor), Market (4 auction types), Coalition, and Holarchy.',
   },
   {
     icon: Zap,
-    title: 'Async Runtime',
-    description: 'Built on Tokio for high-performance concurrent execution. Scale from single agents to thousands.',
+    title: 'Production Runtime',
+    description: '4 restart strategies (Never, Always, OnFailure, ExponentialBackoff), CircuitBreaker (Closed/Open/HalfOpen), HealthCheck, MetricsRegistry, Sandbox isolation, and 4 scheduling policies.',
   },
   {
     icon: Shield,
     title: 'Rust Safety',
-    description: "Memory safety, thread safety, and fearless concurrency. Leverage Rust's type system for robust agents.",
+    description: 'All types are Send + Sync. Zero-cost async on Tokio. Memory safety without GC. The type system enforces agent contracts — AgentResult, AgentError variants, and lifecycle transitions at compile time.',
   },
 ];
 
-const quickStartCode = `use zeroicai_core::prelude::*;
-use zeroicai_messaging::Channel;
+const quickStartCode = `use z_core::prelude::*;
 
-#[derive(Agent)]
-struct MyAgent {
-    name: String,
-    inbox: Channel<Message>,
-}
+#[async_trait]
+impl Agent for MyAgent {
+    fn id(&self) -> &AgentId { &self.id }
 
-impl AgentBehavior for MyAgent {
-    async fn on_message(&mut self, msg: Message) -> Result<()> {
-        println!("{}: received {:?}", self.name, msg);
+    async fn initialize(&mut self, ctx: &AgentContext) -> AgentResult<()> {
+        ctx.log_info("Agent initializing");
         Ok(())
     }
-}
 
-#[tokio::main]
-async fn main() -> Result<()> {
-    let agent = MyAgent::new("Alice");
-    agent.start().await
+    async fn execute(&mut self, ctx: &AgentContext) -> AgentResult<()> {
+        ctx.log_info("Agent executing");
+        Ok(())
+    }
+
+    async fn shutdown(&mut self, ctx: &AgentContext) -> AgentResult<()> {
+        ctx.log_info("Agent shutting down");
+        Ok(())
+    }
 }`;
 
 const stats = [
@@ -87,131 +84,124 @@ const stats = [
 const roadmapItems = [
   { name: 'z-core', status: 'done' },
   { name: 'z-messaging', status: 'done' },
-  { name: 'z-cognition', status: 'in-progress' },
-  { name: 'z-patterns', status: 'in-progress' },
-  { name: 'z-runtime', status: 'planned' },
-  { name: 'zeroicai-deploy', status: 'planned' },
+  { name: 'z-cognition', status: 'done' },
+  { name: 'z-patterns', status: 'done' },
+  { name: 'z-runtime', status: 'done' },
+  { name: 'zeroicai', status: 'done' },
+  { name: 'z-xbot', status: 'done' },
+  { name: 'z-deploy', status: 'planned' },
 ];
 
-const contractAddress = "000000000000000000000000000000000000000000pump";
-
 export default function Home() {
-const [copied, setCopied] = useState(false);
-
-const copyToClipboard = () => {
-  navigator.clipboard.writeText(contractAddress);
-  setCopied(true);
-  setTimeout(() => setCopied(false), 2000);
-};
-
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative min-h-[100vh] flex items-center overflow-hidden">
-        {/* Grid pattern background */}
-        <div className="absolute inset-0 grid-pattern opacity-50" />
-        <div className="absolute inset-0 hero-gradient" />
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-8"
-            >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-                <motion.span
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="inline-block"
-                >
-                  Agent-Oriented Programming
-                </motion.span>
-                <motion.span
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="block text-primary"
-                >
-                  for Rust
-                </motion.span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Build intelligent, autonomous multi-agent systems with Rust's safety guarantees.
-                Production-ready framework for the next generation of distributed AI.
-              </p>
+      {/* ── Hero ───────────────────────────────────────── */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-20">
 
-            {/* <div className="w-[95%] sm:w-auto bg-card/80 backdrop-blur-sm place-self-center mt-[2rem] md:mt-[1rem] rounded-xl p-4 py-2 mb-8 border border-border max-w-xl mx-auto lg:mx-0">
-              <p className="text-xs text-start text-muted-foreground mb-2 font-medium">Contract Address</p>
-              <div className="flex items-center gap-10">
-                <code className="flex-1 text-xs sm:text-sm font-mono text-foreground truncate">
-                  {contractAddress}
-                </code>
-                <button
-                  onClick={copyToClipboard}
-                  className="p-2 rounded-xl bg-primary/20 border-gray-300 border hover:bg-primary/30 transition-colors flex-shrink-0"
-                >
-                  {copied ? (
-                    <Check className="w-3 h-3 md:w-4 md:h-4 text-success" />
-                  ) : (
-                    <Copy className="w-3 h-3 md:w-4 md:h-4 text-dark" />
-                  )}
-                </button>
-              </div>
-            </div> */}
-
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-            >
-              <Link href="/chat">
-                <Button variant="hero" size="xl">
-                  Chat with Agent
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <a
-                href="https://github.com/zeroicai"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="hero-outline" size="xl">
-                  <Github className="mr-2 h-5 w-5" />
-                  View on GitHub
-                </Button>
-              </a>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex justify-center gap-8 sm:gap-12"
-            >
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <div className="flex items-center justify-center gap-2 mb-1">
-                    <stat.icon className="h-4 w-4 text-primary" />
-                    <span className="text-2xl font-bold">{stat.value}</span>
-                  </div>
-                  <span className="text-sm text-muted-foreground">{stat.label}</span>
-                </div>
-              ))}
-            </motion.div>
+        {/* Rotating glyph backdrop */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center text-[var(--cyan)] opacity-[0.09]">
+          <div className="animate-ring-rotate">
+            <OccultGlyph size={900} />
           </div>
         </div>
 
+        {/* Eye particles */}
+        <EyeParticles count={18} />
+
+        {/* Scan beam */}
+        <div className="scan-beam" />
+
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+
+          {/* Label */}
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="terminal-text text-[0.65rem] uppercase tracking-[0.55em] mb-6"
+          >
+            ▸ Multi-Agent Systems Framework
+          </motion.p>
+
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase leading-none tracking-tight mb-6"
+          >
+            Agent-Oriented
+            <br />
+            Programming{' '}
+            <span className="text-[var(--cyan)] text-glow-cyan animate-flicker">
+              for Rust
+            </span>
+          </motion.h1>
+
+          {/* Sub */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="font-mono text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed mb-10"
+          >
+            Build intelligent, autonomous multi-agent systems.<br />
+            BDI cognition. FIPA messaging. 8 organizational patterns.<br />
+            <span className="text-[var(--yellow-glow)] text-glow-yellow">Deployed in Rust.</span>
+          </motion.p>
+
+          {/* CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="flex flex-wrap items-center justify-center gap-4 mb-14"
+          >
+            <Link href="/chat" className="btn-cyber glitch-hover">
+              Chat with Agent
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <a
+              href="https://github.com/zeroicai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-cyber btn-cyber-ghost glitch-hover"
+            >
+              <ArrowRight className="h-3.5 w-3.5" />
+              View on GitHub
+            </a>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9 }}
+            className="flex justify-center gap-10 sm:gap-16"
+          >
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <stat.icon className="h-3.5 w-3.5 text-[var(--cyan)]" />
+                  <span className="font-display text-2xl font-black text-[var(--cyan)] text-glow-cyan">
+                    {stat.value}
+                  </span>
+                </div>
+                <span className="terminal-text text-[0.6rem] uppercase tracking-[0.3em]">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 bg-muted/30">
+      {/* ── Agent Ticker ────────────────────────────────── */}
+      <AgentTicker />
+
+      {/* ── Features ────────────────────────────────────── */}
+      <section className="py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -220,24 +210,28 @@ const copyToClipboard = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Everything You Need for Multi-Agent Systems
+            <p className="terminal-text text-[0.65rem] uppercase tracking-[0.5em] mb-3">
+              ▸ Framework capabilities
+            </p>
+            <h2 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight mb-4">
+              Everything You Need for{' '}
+              <span className="text-[var(--cyan)]">Multi-Agent Systems</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A comprehensive framework with modular crates designed for production-grade agent applications.
+            <p className="text-muted-foreground max-w-xl mx-auto text-sm">
+              Modular crates designed for production-grade agent applications.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((feature, i) => (
-              <FeatureCard key={feature.title} {...feature} delay={i * 0.1} />
+              <FeatureCard key={feature.title} {...feature} delay={i * 0.08} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Quick Start Section */}
-      <section className="py-24">
+      {/* ── Quick Start ─────────────────────────────────── */}
+      <section className="py-24 border-y border-[var(--cyan)]/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -246,53 +240,53 @@ const copyToClipboard = () => {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                Start Building in Minutes
+              <p className="terminal-text text-[0.65rem] uppercase tracking-[0.5em] mb-3">
+                ▸ Getting started
+              </p>
+              <h2 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight mb-4">
+                Start Building in{' '}
+                <span className="text-[var(--cyan)]">Minutes</span>
               </h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                Simple, expressive API that feels natural in Rust. Define agents with derive macros,
-                implement behaviors with async traits, and let the runtime handle the rest.
+              <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                Simple, expressive API that feels natural in Rust. Implement
+                the Agent trait, define behaviors with async methods, and let
+                the runtime handle the rest.
               </p>
               <ul className="space-y-3 mb-8">
                 {[
-                  'Derive macros for agent definition',
+                  'Agent trait with lifecycle hooks',
                   'Async/await message handling',
                   'Type-safe channel communication',
                   'Built-in lifecycle management',
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
+                  <li key={item} className="flex items-center gap-3 text-sm">
+                    <span className="text-[var(--cyan)] text-glow-cyan font-mono">▸</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-              <Link href="/docs/getting-started">
-                <Button variant="default" size="lg">
-                  Read the Documentation
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+              <Link href="/docs/getting-started" className="btn-cyber">
+                Read the Documentation
+                <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </motion.div>
 
             <motion.div
-              className="w-[100%] place-self-center overflow-hidden"
+              className="relative overflow-hidden"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <CodeBlock
-                code={quickStartCode}
-                language="rust"
-                filename="main.rs"
-              />
+              <div className="scan-beam" />
+              <CodeBlock code={quickStartCode} language="rust" filename="main.rs" />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Roadmap Preview */}
-      <section className="py-24 bg-muted/30">
+      {/* ── Crate Roster ────────────────────────────────── */}
+      <section className="py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -301,11 +295,15 @@ const copyToClipboard = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Polyrepo Architecture
+            <p className="terminal-text text-[0.65rem] uppercase tracking-[0.5em] mb-3">
+              ▸ Architecture
+            </p>
+            <h2 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight mb-4">
+              Polyrepo{' '}
+              <span className="text-[var(--cyan)]">Crate System</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Modular design with independent crates for maximum flexibility and reusability.
+            <p className="text-muted-foreground text-sm max-w-xl mx-auto">
+              Modular design. Use only what you need.
             </p>
           </motion.div>
 
@@ -314,97 +312,108 @@ const copyToClipboard = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
+            className="max-w-2xl mx-auto"
           >
-            {/* Progress bar */}
             <div className="mb-8">
-              <div className="flex justify-between text-sm mb-2">
-                <span className="font-medium">Overall Progress</span>
-                <span className="text-primary font-bold">40%</span>
+              <div className="flex justify-between text-xs mb-2 font-mono">
+                <span className="text-muted-foreground uppercase tracking-wider">Overall Progress</span>
+                <span className="text-[var(--cyan)] text-glow-cyan font-bold">Phase 2 — Stable</span>
               </div>
               <div className="progress-bar">
                 <motion.div
                   initial={{ width: 0 }}
-                  whileInView={{ width: '40%' }}
-                  transition={{ duration: 1, delay: 0.3 }}
+                  whileInView={{ width: '85%' }}
+                  transition={{ duration: 1.2, delay: 0.3 }}
                   viewport={{ once: true }}
                   className="progress-bar-fill"
                 />
               </div>
             </div>
 
-            {/* Crate list */}
             <div className="grid sm:grid-cols-2 gap-3">
               {roadmapItems.map((item, i) => (
                 <motion.div
                   key={item.name}
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: i * 0.05 }}
+                  transition={{ duration: 0.3, delay: i * 0.06 }}
                   viewport={{ once: true }}
-                  className="flex items-center gap-3 p-3 rounded-lg bg-card border"
+                  className="holo-frame flex items-center gap-3 p-4"
                 >
                   <div
-                    className={`h-3 w-3 rounded-full ${
+                    className={`h-2 w-2 rounded-full flex-shrink-0 ${
                       item.status === 'done'
-                        ? 'bg-emerald-500'
-                        : item.status === 'in-progress'
-                        ? 'bg-amber-500 animate-pulse-slow'
+                        ? 'bg-emerald-400'
                         : 'bg-muted-foreground/30'
                     }`}
+                    style={item.status === 'done' ? { boxShadow: '0 0 6px #34d399' } : {}}
                   />
-                  <span className="font-mono text-sm">{item.name}</span>
+                  <span className={`font-mono text-sm ${item.status === 'done' ? 'text-[var(--cyan)]' : 'text-muted-foreground'}`}>
+                    {item.name}
+                  </span>
+                  <span className={`ml-auto text-[0.6rem] font-mono uppercase tracking-wider opacity-70 ${
+                    item.status === 'done' ? 'text-emerald-400' : 'text-muted-foreground'
+                  }`}>
+                    {item.status === 'done' ? 'online' : 'planned'}
+                  </span>
                 </motion.div>
               ))}
             </div>
 
             <div className="text-center mt-8">
-              <Link href="/roadmap">
-                <Button variant="outline">
-                  View Full Roadmap
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+              <Link href="/roadmap" className="btn-cyber btn-cyber-ghost">
+                View Full Roadmap
+                <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* ── CTA ─────────────────────────────────────────── */}
       <section className="py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border p-8 sm:p-12 text-center"
+            className="holo-frame relative overflow-hidden p-10 sm:p-16 text-center"
           >
-            <div className="absolute inset-0 grid-pattern opacity-30" />
+            <div className="scan-beam" />
+
+            {/* Glyph watermark */}
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center text-[var(--cyan)] opacity-[0.05]">
+              <OccultGlyph size={600} />
+            </div>
+
             <div className="relative z-10">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                Ready to Build Intelligent Agents?
+              <p className="terminal-text text-[0.65rem] uppercase tracking-[0.5em] mb-4">
+                ▸ Open Source — MIT / Apache-2.0
+              </p>
+              <h2 className="font-display text-2xl sm:text-4xl font-black uppercase tracking-tight mb-4">
+                Ready to Build{' '}
+                <span className="text-[var(--cyan)] text-glow-cyan animate-flicker">
+                  Intelligent Agents?
+                </span>
               </h2>
-              <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
-                Join the community building the future of multi-agent systems in Rust.
-                Open source, MIT/Apache-2.0 licensed.
+              <p className="text-muted-foreground text-sm max-w-md mx-auto mb-10">
+                Join the community building the future of multi-agent systems
+                in Rust.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/docs/getting-started">
-                  <Button variant="hero" size="lg">
-                    Get Started
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                <Link href="/docs/getting-started" className="btn-cyber glitch-hover">
+                  Get Started
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <a
                   href="https://github.com/zeroicai"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="btn-cyber btn-cyber-ghost glitch-hover"
                 >
-                  <Button variant="outline" size="lg">
-                    <Github className="mr-2 h-4 w-4" />
-                    Star on GitHub
-                  </Button>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                  Star on GitHub
                 </a>
               </div>
             </div>
