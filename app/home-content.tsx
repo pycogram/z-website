@@ -99,7 +99,7 @@ const roadmapItems = [
   { name: 'z-deploy', status: 'planned' },
 ];
 
-const CA = 'ZERoiCAiXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+const CA = 'yi66MMYBeHvMAbiboJeqVcjXh3b746D3P6nCRfypump';
 
 function CopyCA() {
   const [copied, setCopied] = useState(false);
