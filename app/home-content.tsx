@@ -128,7 +128,7 @@ export default function Home() {
     <Layout>
 
       {/* ── Hero ───────────────────────────────────────── */}
-      <section className="relative lg:min-h-screen flex items-center overflow-hidden px-4">
+      <section className="relative h-full py-12 md:py-12 lg:py-20 flex items-center overflow-hidden px-4">
 
         {/* Dot grid background */}
         <div
@@ -139,7 +139,7 @@ export default function Home() {
           }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-8 lg:gap-12 items-center pt-24 pb-12 lg:pt-20 lg:pb-10">
+        <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* Left — text */}
           <div>
