@@ -128,7 +128,7 @@ export default function Home() {
     <Layout>
 
       {/* ── Hero ───────────────────────────────────────── */}
-      <section className="relative h-full py-12 md:py-12 lg:py-20 flex items-center overflow-hidden px-4">
+      <section className="relative min-h-screen flex items-center overflow-hidden px-4">
 
         {/* Dot grid background */}
         <div
