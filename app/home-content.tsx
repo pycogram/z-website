@@ -75,13 +75,12 @@ impl Agent for MyAgent {
     }
 }`;
 
-const quickStartCode = `# Cargo.toml
-[dependencies]
-z-core      = { git = "https://github.com/ZeroicAI/z-core" }
+const quickStartCode = `[dependencies]
+z-core = { git = "https://github.com/ZeroicAI/z-core" }
 z-messaging = { git = "https://github.com/ZeroicAI/z-messaging" }
 z-cognition = { git = "https://github.com/ZeroicAI/z-cognition" }
-z-patterns  = { git = "https://github.com/ZeroicAI/z-patterns" }
-z-runtime   = { git = "https://github.com/ZeroicAI/z-runtime" }`;
+z-patterns = { git = "https://github.com/ZeroicAI/z-patterns" }
+z-runtime = { git = "https://github.com/ZeroicAI/z-runtime" }`;
 
 const stats = [
   { label: 'Crates', value: '7', icon: Package },
@@ -129,7 +128,7 @@ export default function Home() {
     <Layout>
 
       {/* ── Hero ───────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden px-4 pt-20">
+      <section className="relative h-full py-12 md:py-12 lg:py-20 flex items-center overflow-hidden px-4">
 
         {/* Dot grid background */}
         <div
@@ -140,7 +139,7 @@ export default function Home() {
           }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center py-16">
+        <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* Left — text */}
           <div>
@@ -166,7 +165,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6"
+              className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6"
             >
               Build Autonomous{' '}
               <span className="text-[var(--cyan)]">Agent Systems</span>{' '}
@@ -225,11 +224,12 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Right — code */}
+          {/* Right — code (hidden on mobile) */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="hidden lg:block"
           >
             <CodeBlock code={heroCode} language="rust" filename="agent.rs" />
           </motion.div>
@@ -270,25 +270,35 @@ export default function Home() {
       {/* ── Quick Start ─────────────────────────────────── */}
       <section className="py-24 border-t border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            viewport={{ once: true }}
+            className="mb-14"
+          >
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.4em] text-[var(--cyan)] mb-3">
+              Getting started
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
+              Add to your project in{' '}
+              <span className="text-[var(--cyan)]">seconds</span>
+            </h2>
+            <p className="text-muted-foreground text-sm max-w-xl">
+              Add the crates you need to your Cargo.toml. Each crate is
+              independent — use only what your application requires.
+            </p>
+          </motion.div>
+
+          <div className="grid w-full overflow-x-scroll md:overflow-hidden lg:grid-cols-2 gap-16 items-start">
             <motion.div
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
               viewport={{ once: true }}
             >
-              <p className="font-mono text-[0.7rem] uppercase tracking-[0.4em] text-[var(--cyan)] mb-3">
-                Getting started
-              </p>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
-                Add to your project in{' '}
-                <span className="text-[var(--cyan)]">seconds</span>
-              </h2>
-              <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-                Add the crates you need to your Cargo.toml. Each crate is
-                independent — use only what your application requires.
-              </p>
-              <ul className="space-y-2.5 mb-8">
+              <ul className="space-y-2.5 mb-8 mt-2">
                 {[
                   'Agent trait with async lifecycle hooks',
                   'Type-safe FIPA message passing',
@@ -313,7 +323,7 @@ export default function Home() {
               transition={{ duration: 0.4 }}
               viewport={{ once: true }}
             >
-              <CodeBlock code={quickStartCode} language="toml" filename="Cargo.toml" />
+              <CodeBlock code={quickStartCode} language="toml" filename="Cargo.toml" showLineNumbers={false} />
             </motion.div>
           </div>
         </div>
