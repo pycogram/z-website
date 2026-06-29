@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import {
   Cpu,
   MessageSquare,
@@ -12,6 +13,8 @@ import {
   ArrowRight,
   Package,
   Clock,
+  Copy,
+  Check,
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { FeatureCard } from '@/components/FeatureCard';
@@ -97,6 +100,30 @@ const roadmapItems = [
   { name: 'z-deploy', status: 'planned' },
 ];
 
+const CA = 'ZERoiCAiXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+
+function CopyCA() {
+  const [copied, setCopied] = useState(false);
+  const copy = () => {
+    navigator.clipboard.writeText(CA);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <button
+      onClick={copy}
+      className="flex items-center gap-2 px-3 py-1.5 rounded border border-[var(--cyan)]/30 bg-[var(--cyan)]/5 hover:bg-[var(--cyan)]/10 hover:border-[var(--cyan)]/60 transition-all text-xs font-mono text-[var(--cyan)]/70 hover:text-[var(--cyan)] group"
+    >
+      <span className="hidden sm:inline text-muted-foreground/50 text-[0.65rem] uppercase tracking-widest mr-1">CA</span>
+      <span>{CA.slice(0, 6)}...{CA.slice(-6)}</span>
+      {copied
+        ? <Check className="h-3 w-3 text-emerald-400" />
+        : <Copy className="h-3 w-3 opacity-50 group-hover:opacity-100" />
+      }
+    </button>
+  );
+}
+
 export default function Home() {
   return (
     <Layout>
@@ -117,10 +144,19 @@ export default function Home() {
 
           {/* Left — text */}
           <div>
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
+              className="mb-4"
+            >
+              <CopyCA />
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.05 }}
               className="font-mono text-[0.7rem] uppercase tracking-[0.4em] text-[var(--cyan)] mb-5"
             >
               Multi-Agent Framework · Rust
