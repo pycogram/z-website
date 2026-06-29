@@ -75,13 +75,12 @@ impl Agent for MyAgent {
     }
 }`;
 
-const quickStartCode = `# Cargo.toml
-[dependencies]
-z-core      = { git = "https://github.com/ZeroicAI/z-core" }
+const quickStartCode = `[dependencies]
+z-core = { git = "https://github.com/ZeroicAI/z-core" }
 z-messaging = { git = "https://github.com/ZeroicAI/z-messaging" }
 z-cognition = { git = "https://github.com/ZeroicAI/z-cognition" }
-z-patterns  = { git = "https://github.com/ZeroicAI/z-patterns" }
-z-runtime   = { git = "https://github.com/ZeroicAI/z-runtime" }`;
+z-patterns = { git = "https://github.com/ZeroicAI/z-patterns" }
+z-runtime = { git = "https://github.com/ZeroicAI/z-runtime" }`;
 
 const stats = [
   { label: 'Crates', value: '7', icon: Package },
@@ -292,7 +291,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid w-full overflow-scroll lg:grid-cols-2 gap-16 items-start">
+          <div className="grid w-full overflow-x-scroll md:overflow-hidden lg:grid-cols-2 gap-16 items-start">
             <motion.div
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -324,7 +323,7 @@ export default function Home() {
               transition={{ duration: 0.4 }}
               viewport={{ once: true }}
             >
-              <CodeBlock code={quickStartCode} language="toml" filename="Cargo.toml" />
+              <CodeBlock code={quickStartCode} language="toml" filename="Cargo.toml" showLineNumbers={false} />
             </motion.div>
           </div>
         </div>
