@@ -16,7 +16,7 @@ const footerLinks = {
   ],
   community: [
     { label: 'GitHub', href: 'https://github.com/zeroicai', external: true },
-    { label: 'Twitter / X', href: 'https://x.com/tm401z', external: true },
+    { label: 'Twitter / X', href: 'https://x.com/ZeroicAI', external: true },
     { label: 'Contributing', href: '/#' },
     { label: 'Code of Conduct', href: '/#' },
   ],
@@ -59,7 +59,7 @@ export function Footer() {
                 GitHub ↗
               </a>
               <a
-                href="https://x.com/tm401z"
+                href="https://x.com/ZeroicAI"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground hover:text-[var(--cyan)] transition-colors"
