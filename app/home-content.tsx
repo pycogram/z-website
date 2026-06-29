@@ -128,7 +128,7 @@ export default function Home() {
     <Layout>
 
       {/* ── Hero ───────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden px-4">
+      <section className="relative lg:min-h-screen flex items-center overflow-hidden w-full px-4 py-20 sm:py-24 lg:py-0">
 
         {/* Dot grid background */}
         <div
@@ -224,14 +224,24 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Right — code (hidden on mobile) */}
+          {/* Right — code (desktop: full, mobile: short) */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="hidden lg:block"
+            className="w-full min-w-0"
           >
-            <CodeBlock code={heroCode} language="rust" filename="agent.rs" />
+            <div className="hidden lg:block">
+              <CodeBlock code={heroCode} language="rust" filename="agent.rs" showLineNumbers={false} />
+            </div>
+            <div className="lg:hidden">
+              <CodeBlock
+                code={`use z_core::prelude::*;\n\n#[async_trait]\nimpl Agent for MyAgent {\n    async fn execute(\n        &mut self,\n        ctx: &AgentContext,\n    ) -> AgentResult<()> {\n        ctx.log_info("Tick");\n        Ok(())\n    }\n}`}
+                language="rust"
+                filename="agent.rs"
+                showLineNumbers={false}
+              />
+            </div>
           </motion.div>
 
         </div>
@@ -291,7 +301,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid w-full overflow-x-scroll md:overflow-hidden lg:grid-cols-2 gap-16 items-start">
+          <div className="grid w-full lg:grid-cols-2 gap-16 items-start">
             <motion.div
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -322,8 +332,11 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
               viewport={{ once: true }}
+              className="w-full min-w-0"
             >
-              <CodeBlock code={quickStartCode} language="toml" filename="Cargo.toml" showLineNumbers={false} />
+              <div className="overflow-x-auto">
+                <CodeBlock code={quickStartCode} language="toml" filename="Cargo.toml" showLineNumbers={false} />
+              </div>
             </motion.div>
           </div>
         </div>

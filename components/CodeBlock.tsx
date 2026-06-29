@@ -30,7 +30,7 @@ export function CodeBlock({
   };
 
   return (
-    <div className={cn('code-block group relative overflow-hidden', className)}>
+    <div className={cn('code-block group relative', className)}>
       {/* Header */}
       {filename && (
         <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/5">
@@ -54,7 +54,7 @@ export function CodeBlock({
       <Highlight theme={themes.nightOwl} code={code.trim()} language={language as any}>
         {({ className: hlClassName, style, tokens, getLineProps, getTokenProps }) => (
           <pre
-            className={cn(hlClassName, 'p-4 overflow-hidden text-sm font-mono')}
+            className={cn(hlClassName, 'p-4 overflow-x-auto scrollbar-hide text-sm font-mono')}
             style={{ ...style, background: 'transparent' }}
           >
             {tokens.map((line, i) => (
