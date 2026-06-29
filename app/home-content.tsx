@@ -15,6 +15,12 @@ import {
   Clock,
   Copy,
   Check,
+  TrendingUp,
+  Server,
+  Gamepad2,
+  Radio,
+  Activity,
+  Bot,
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { FeatureCard } from '@/components/FeatureCard';
@@ -86,6 +92,45 @@ const stats = [
   { label: 'Crates', value: '7', icon: Package },
   { label: 'Progress', value: '85%', icon: Clock },
   { label: 'Patterns', value: '8', icon: Network },
+];
+
+const useCases = [
+  {
+    icon: TrendingUp,
+    title: 'DeFi & Trading Bots',
+    description: 'Coordinate fleets of trading agents using the Market pattern — Dutch auctions, sealed bids, and English auctions built in. BDI reasoning for signal evaluation and position sizing.',
+    tags: ['Market pattern', 'z-patterns', 'z-cognition'],
+  },
+  {
+    icon: Activity,
+    title: 'Swarm Simulations',
+    description: 'Model flocking, stigmergy, and emergent behavior with the Swarm pattern. Thousands of lightweight async agents on a single Tokio runtime with zero GC pauses.',
+    tags: ['Swarm pattern', 'z-core', 'z-runtime'],
+  },
+  {
+    icon: Server,
+    title: 'Self-Healing Services',
+    description: 'Supervised agent hierarchies with 4 restart strategies and circuit breakers. Build pipelines where each stage is an autonomous agent that recovers without operator intervention.',
+    tags: ['z-runtime', 'Hierarchy pattern', 'CircuitBreaker'],
+  },
+  {
+    icon: Bot,
+    title: 'Reasoning Chatbots',
+    description: 'BDI agents that reason over a belief base before replying. Rule-based inference with LLM fallback — structured knowledge, not just pattern matching.',
+    tags: ['z-cognition', 'BeliefBase', 'ReasoningEngine'],
+  },
+  {
+    icon: Radio,
+    title: 'IoT Coordination',
+    description: 'Deploy agents across edge nodes using the Federation pattern. Each node runs an independent agent; agents negotiate over FIPA ACL without a central coordinator.',
+    tags: ['Federation pattern', 'z-messaging', 'FIPA ACL'],
+  },
+  {
+    icon: Gamepad2,
+    title: 'Game AI & NPCs',
+    description: 'Give NPCs real goals, beliefs, and STRIPS-style planning instead of scripted state machines. The IntentionStack and UtilityFunction map directly to game-AI design patterns.',
+    tags: ['z-cognition', 'Planner', 'UtilityFunction'],
+  },
 ];
 
 const roadmapItems = [
@@ -272,6 +317,64 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((feature, i) => (
               <FeatureCard key={feature.title} {...feature} delay={i * 0.07} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Use Cases ───────────────────────────────────── */}
+      <section className="py-24 border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            viewport={{ once: true }}
+            className="mb-14"
+          >
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.4em] text-[var(--cyan)] mb-3">
+              What you can build
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
+              Real systems,{' '}
+              <span className="text-[var(--cyan)]">real Rust</span>
+            </h2>
+            <p className="text-muted-foreground text-sm max-w-xl">
+              ZeroicAI is a coordination and reasoning layer — not a toy demo.
+              Here's what teams are building with it.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {useCases.map((uc, i) => (
+              <motion.div
+                key={uc.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: i * 0.07 }}
+                viewport={{ once: true }}
+                className="holo-frame p-6 flex flex-col gap-4"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded bg-[var(--cyan)]/10 text-[var(--cyan)]">
+                    <uc.icon className="h-4 w-4" />
+                  </div>
+                  <h3 className="font-semibold text-sm">{uc.title}</h3>
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed flex-1">
+                  {uc.description}
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {uc.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-mono text-[0.6rem] px-2 py-0.5 rounded border border-[var(--cyan)]/20 text-[var(--cyan)]/60 bg-[var(--cyan)]/5"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
