@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ChevronRight, CheckCircle2, Circle, Clock, Github } from 'lucide-react';
+import { ChevronRight, CheckCircle2, Circle, Clock, ExternalLink } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { MotionDiv } from '@/components/framer/motion';
@@ -28,7 +28,7 @@ const roadmapItems: RoadmapItem[] = [
     features: ['Typed channels', 'Address system', 'Async/await', 'Serialization'],
   },
   {
-    name: 'zeroicai-macros',
+    name: 'z-macros',
     version: '0.1.0',
     status: 'done',
     description: 'Procedural macros for ergonomic APIs',
@@ -56,28 +56,28 @@ const roadmapItems: RoadmapItem[] = [
     features: ['Tokio integration', 'Supervision trees', 'Fault tolerance', 'Scheduling'],
   },
   {
-    name: 'zeroicai-deploy',
+    name: 'z-deploy',
     version: '0.1.0',
     status: 'planned',
     description: 'Deployment and orchestration tools',
     features: ['Docker support', 'Kubernetes operators', 'Monitoring', 'Distributed deployment'],
   },
   {
-    name: 'zeroicai-tools',
+    name: 'z-tools',
     version: '0.1.0',
     status: 'planned',
     description: 'Development and debugging utilities',
     features: ['Visual debugger', 'Message inspector', 'Performance profiler', 'Test harness'],
   },
   {
-    name: 'zeroicai-storage',
+    name: 'z-storage',
     version: '0.1.0',
     status: 'planned',
     description: 'Persistence and state management',
     features: ['Agent state persistence', 'Event sourcing', 'Snapshot support'],
   },
   {
-    name: 'zeroicai-network',
+    name: 'z-network',
     version: '0.1.0',
     status: 'planned',
     description: 'Distributed agent networking',
@@ -221,7 +221,7 @@ export default function Roadmap() {
             </p>
             <a href="https://github.com/zeroicai" target="_blank" rel="noopener noreferrer">
               <Button variant="outline">
-                <Github className="mr-2 h-4 w-4" />
+                <ExternalLink className="mr-2 h-4 w-4" />
                 Contribute on GitHub
               </Button>
             </a>
