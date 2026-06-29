@@ -246,17 +246,17 @@
 /* ── Cyber buttons ───────────────────────────────────────── */
 .btn-cyber {
   position: relative;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 0.85rem 1.75rem;
+  padding: 0.75rem 1.5rem;
   border: 1px solid var(--cyan);
+  border-radius: 4px;
   background: rgba(12, 16, 32, 0.8);
   color: var(--cyan);
-  transition: all 0.3s;
-  clip-path: polygon(8% 0, 100% 0, 100% 75%, 92% 100%, 0 100%, 0 25%);
+  transition: all 0.2s;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -325,9 +325,9 @@
 
   .nav-link {
     @apply relative text-muted-foreground transition-colors duration-200;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
   .nav-link:hover {
@@ -360,8 +360,8 @@
   }
   .progress-bar-fill {
     @apply h-full rounded-full transition-all duration-1000 ease-out;
-    background: linear-gradient(to right, var(--cyan), var(--neon));
-    box-shadow: 0 0 8px var(--cyan);
+    background: linear-gradient(to right, var(--cyan), rgba(136, 228, 248, 0.5));
+    box-shadow: 0 0 6px rgba(136, 228, 248, 0.4);
   }
 
   .crate-badge {

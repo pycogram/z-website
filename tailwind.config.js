@@ -17,7 +17,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        display: ["Orbitron", "sans-serif"],
+        display: ["Space Grotesk", "system-ui", "sans-serif"],
         sans: ["Space Grotesk", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "Fira Code", "monospace"],
       },

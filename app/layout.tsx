@@ -172,7 +172,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="scanlines antialiased">
+      <body className="antialiased">
         <ThemeProvider defaultTheme="dark" storageKey="zeroicai-theme">
           <GlobalEffects />
           {children}
