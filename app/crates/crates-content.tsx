@@ -15,66 +15,59 @@ interface CrateInfo {
 const crates: CrateInfo[] = [
   {
     name: 'z-core',
-    description: 'Core agent primitives, lifecycle management, and capability system. The foundation for all agents.',
+    description: 'Agent trait, AgentId, AgentContext, AgentState, and AgentResult. The foundation every other crate builds on.',
     status: 'stable',
-    features: ['Agent derive macro', 'Lifecycle hooks', 'Capability system', 'State management'],
-    href: '/crates/core',
+    features: ['Agent trait', 'AgentId (UUID)', 'AgentContext', 'AgentState machine'],
+    href: 'https://github.com/ZeroicAI/z-core',
   },
   {
     name: 'z-messaging',
-    description: 'Type-safe async message passing with channels, addresses, and serialization support.',
+    description: 'Async message passing with a typed Router, bounded Mailboxes, MessageBuilder, and 11 FIPA ACL performatives.',
     status: 'stable',
-    features: ['Typed channels', 'Async/await', 'Address system', 'Serialization'],
-    href: '/crates/messaging',
+    features: ['Router', 'Mailbox', 'FIPA performatives', 'RequestReply'],
+    href: 'https://github.com/ZeroicAI/z-messaging',
   },
   {
     name: 'z-cognition',
-    description: 'BDI cognitive architecture with beliefs, desires, intentions, plan libraries, and reasoning.',
+    description: 'Full BDI cognitive architecture: BeliefBase, forward-chaining ReasoningEngine, BFS STRIPS Planner, UtilityFunction, and IntentionStack.',
     status: 'beta',
-    features: ['BDI model', 'Plan library', 'Goal reasoning', 'Deliberation'],
-    href: '/crates/cognition',
+    features: ['BeliefBase', 'ReasoningEngine', 'STRIPS Planner', 'BDI model'],
+    href: 'https://github.com/ZeroicAI/z-cognition',
   },
   {
     name: 'z-patterns',
-    description: 'Organizational patterns for multi-agent coordination: hierarchy, swarm, market, coalition, and more.',
+    description: '8 organizational patterns for multi-agent coordination, each with a spawn_agents() bridge to z-runtime.',
     status: 'beta',
-    features: ['Hierarchy', 'Swarm', 'Market', 'Coalition', 'Holarchy', 'Blackboard'],
-    href: '/crates/patterns',
+    features: ['Swarm', 'Hierarchy', 'Market', 'Federation', 'Coalition', 'Blackboard', 'Team', 'Holarchy'],
+    href: 'https://github.com/ZeroicAI/z-patterns',
   },
   {
     name: 'z-runtime',
-    description: 'Async execution engine built on Tokio. Handles agent scheduling, supervision, and fault tolerance.',
-    status: 'coming-soon',
-    features: ['Tokio runtime', 'Supervision', 'Scheduling', 'Fault tolerance'],
-    href: '/crates/runtime',
+    description: 'Async execution engine on Tokio. Spawns agents as tasks, supervises with restart policies, and provides circuit breaking, scheduling, metrics, and sandboxing.',
+    status: 'beta',
+    features: ['Supervisor', 'CircuitBreaker', 'Scheduler', 'MetricsRegistry', 'Sandbox'],
+    href: 'https://github.com/ZeroicAI/z-runtime',
+  },
+  {
+    name: 'zeroicai',
+    description: 'Facade crate that re-exports z-core, z-messaging, z-cognition, z-patterns, and z-runtime as a single dependency.',
+    status: 'stable',
+    features: ['Single dependency', 'Re-exports all crates', 'Prelude module'],
+    href: 'https://github.com/ZeroicAI/zeroicai',
   },
   {
     name: 'z-deploy',
-    description: 'Deployment utilities for containerization, orchestration, and distributed systems.',
+    description: 'Deployment CLI and utilities for containerizing, monitoring, and scaling ZeroicAI agent systems in production.',
     status: 'coming-soon',
-    features: ['Docker', 'Kubernetes', 'Distributed', 'Monitoring'],
-    href: '/crates/deploy',
-  },
-  {
-    name: 'z-tools',
-    description: 'Development tools including debugging, visualization, and testing utilities.',
-    status: 'coming-soon',
-    features: ['Debugger', 'Visualizer', 'Testing', 'Benchmarks'],
-    href: '/crates/tools',
-  },
-  {
-    name: 'z-macros',
-    description: 'Procedural macros for agent definition, message types, and pattern implementation.',
-    status: 'stable',
-    features: ['Agent derive', 'Message derive', 'Pattern macros'],
-    href: '/crates/macros',
+    features: ['Docker', 'Railway', 'Monitoring', 'CLI'],
+    href: 'https://github.com/ZeroicAI',
   },
 ];
 
 export default function Crates() {
   return (
     <Layout>
-      <div className="min-h-screen">
+      <div>
         {/* Breadcrumb */}
         <div className="border-b bg-muted/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
