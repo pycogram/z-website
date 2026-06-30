@@ -23,6 +23,37 @@ const statusConfig: Record<CrateStatus, { label: string; className: string }> = 
 
 export function CrateCard({ name, description, status, features, href, delay = 0 }: CrateCardProps) {
   const { label, className } = statusConfig[status];
+  const isExternal = href.startsWith('http');
+  const isDisabled = status === 'coming-soon';
+
+  const inner = (
+    <>
+      <div className="flex items-start justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Package className="h-5 w-5 text-primary" />
+          <span className="font-mono font-semibold">{name}</span>
+        </div>
+        <span className={className}>{label}</span>
+      </div>
+
+      <p className="text-sm text-muted-foreground mb-4">{description}</p>
+
+      <div className="flex flex-wrap gap-2 mb-4">
+        {features.slice(0, 4).map((feature) => (
+          <Badge key={feature} variant="secondary" className="text-xs">
+            {feature}
+          </Badge>
+        ))}
+      </div>
+
+      {!isDisabled && (
+        <div className="flex items-center gap-1 text-sm text-primary font-medium">
+          View on GitHub
+          <ArrowRight className="h-4 w-4" />
+        </div>
+      )}
+    </>
+  );
 
   return (
     <MotionDiv
@@ -31,38 +62,17 @@ export function CrateCard({ name, description, status, features, href, delay = 0
       transition={{ duration: 0.5, delay }}
       viewport={{ once: true }}
     >
-      <Link
-        href={href}
-        className={cn(
-          'feature-card block h-full',
-          status === 'coming-soon' && 'opacity-60 pointer-events-none'
-        )}
-      >
-        <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <Package className="h-5 w-5 text-primary" />
-            <span className="font-mono font-semibold">{name}</span>
-          </div>
-          <span className={className}>{label}</span>
-        </div>
-
-        <p className="text-sm text-muted-foreground mb-4">{description}</p>
-
-        <div className="flex flex-wrap gap-2 mb-4">
-          {features.slice(0, 3).map((feature) => (
-            <Badge key={feature} variant="secondary" className="text-xs">
-              {feature}
-            </Badge>
-          ))}
-        </div>
-
-        {status !== 'coming-soon' && (
-          <div className="flex items-center gap-1 text-sm text-primary font-medium">
-            View documentation
-            <ArrowRight className="h-4 w-4" />
-          </div>
-        )}
-      </Link>
+      {isDisabled ? (
+        <div className={cn('feature-card block h-full opacity-50 cursor-default')}>{inner}</div>
+      ) : isExternal ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="feature-card block h-full">
+          {inner}
+        </a>
+      ) : (
+        <Link href={href} className="feature-card block h-full">
+          {inner}
+        </Link>
+      )}
     </MotionDiv>
   );
 }
