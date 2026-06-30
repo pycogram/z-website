@@ -17,10 +17,6 @@ import {
   Check,
   TrendingUp,
   Server,
-  Gamepad2,
-  Radio,
-  Activity,
-  Bot,
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { FeatureCard } from '@/components/FeatureCard';
@@ -102,34 +98,10 @@ const useCases = [
     tags: ['Market pattern', 'z-patterns', 'z-cognition'],
   },
   {
-    icon: Activity,
-    title: 'Swarm Simulations',
-    description: 'Model flocking, stigmergy, and emergent behavior with the Swarm pattern. Thousands of lightweight async agents on a single Tokio runtime with zero GC pauses.',
-    tags: ['Swarm pattern', 'z-core', 'z-runtime'],
-  },
-  {
     icon: Server,
     title: 'Self-Healing Services',
     description: 'Supervised agent hierarchies with 4 restart strategies and circuit breakers. Build pipelines where each stage is an autonomous agent that recovers without operator intervention.',
     tags: ['z-runtime', 'Hierarchy pattern', 'CircuitBreaker'],
-  },
-  {
-    icon: Bot,
-    title: 'Reasoning Chatbots',
-    description: 'BDI agents that reason over a belief base before replying. Rule-based inference with LLM fallback — structured knowledge, not just pattern matching.',
-    tags: ['z-cognition', 'BeliefBase', 'ReasoningEngine'],
-  },
-  {
-    icon: Radio,
-    title: 'IoT Coordination',
-    description: 'Deploy agents across edge nodes using the Federation pattern. Each node runs an independent agent; agents negotiate over FIPA ACL without a central coordinator.',
-    tags: ['Federation pattern', 'z-messaging', 'FIPA ACL'],
-  },
-  {
-    icon: Gamepad2,
-    title: 'Game AI & NPCs',
-    description: 'Give NPCs real goals, beliefs, and STRIPS-style planning instead of scripted state machines. The IntentionStack and UtilityFunction map directly to game-AI design patterns.',
-    tags: ['z-cognition', 'Planner', 'UtilityFunction'],
   },
 ];
 
@@ -345,7 +317,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 gap-4 max-w-3xl">
             {useCases.map((uc, i) => (
               <motion.div
                 key={uc.title}
@@ -377,6 +349,19 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="mt-8"
+          >
+            <Link href="/use-cases" className="btn-cyber btn-cyber-ghost">
+              See all use cases
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 

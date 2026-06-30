@@ -3,15 +3,15 @@
 import { MotionDiv } from "@/components/framer/motion";
 import { Layout } from "@/components/layout/Layout";
 import { motion } from "framer-motion";
-import { Brain, Swords, Search, Twitter, ArrowUpRight, ChevronRight } from "lucide-react";
+import { Brain, Swords, Search, Bot, ArrowUpRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 const products = [
   {
     name: "Cortex",
-    tagline: "The brain of Solana",
+    tagline: "Cognitive agent platform",
     description:
-      "4 autonomous agents working together on Solana - MEV arbitrage, threat detection, yield farming, and smart contract auditing. Self-improving in real time.",
+      "Deploy and manage intelligent agents in production. Cortex is a higher-level platform built on the ZeroicAI framework — dashboards, monitoring, and managed runtimes without touching the low-level API.",
     icon: Brain,
     color: "text-green-400",
     bg: "bg-green-400/10",
@@ -45,14 +45,14 @@ const products = [
   },
   {
     name: "xbot",
-    tagline: "Autonomous Twitter agent",
+    tagline: "Autonomous X agent",
     description:
-      "A Twitter/X bot that posts scheduled tweets, responds to mentions, and generates content using a knowledge base and reasoning engine.",
-    icon: Twitter,
+      "A live X/Twitter bot that posts scheduled content, responds to mentions, and reasons over a belief base before replying — the first ZeroicAI application running in production.",
+    icon: Bot,
     color: "text-blue-400",
     bg: "bg-blue-400/10",
     border: "border-blue-400/20",
-    url: "https://xbot.zeroicai.xyz",
+    url: "https://x.com/ZeroicAI",
     status: "active",
   },
 ];
@@ -60,7 +60,7 @@ const products = [
 export function ProductsContent() {
   return (
     <Layout>
-      <div className="min-h-screen">
+      <div>
         {/* Breadcrumb */}
         <div className="border-b bg-muted/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -69,7 +69,7 @@ export function ProductsContent() {
                 Home
               </Link>
               <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">Product</span>
+              <span className="text-foreground">Products</span>
             </nav>
           </div>
         </div>
