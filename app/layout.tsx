@@ -39,13 +39,13 @@ export const metadata: Metadata = {
   authors: [{ name: "ZeroicAI Contributors" }],
   creator: "ZeroicAI Team",
   publisher: "ZeroicAI",
-  metadataBase: new URL("https://www.zeroicai.org/"),
+  metadataBase: new URL("https://www.zeroicai.xyz/"),
 
   // Open Graph (for social media sharing including Telegram)
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.zeroicai.org/",
+    url: "https://www.zeroicai.xyz/",
     siteName: "ZeroicAI",
     title: "ZeroicAI - Agent-Oriented Programming in Rust",
     description:
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     title: "ZeroicAI - Agent-Oriented Programming in Rust",
     description:
       "Build intelligent, autonomous multi-agent systems with Rust. Production-ready framework for blockchain, trading, IoT, and enterprise.",
-    images: ["https://www.zeroicai.org/assets/twitter-card.png"],
+    images: ["https://www.zeroicai.xyz/assets/twitter-card.png"],
     creator: "@zeroicai",
     site: "@zeroicai",
   },
@@ -136,7 +136,7 @@ export default function RootLayout({
               "applicationCategory": "DeveloperApplication",
               "operatingSystem": "Cross-platform",
               "description": "Build intelligent, autonomous multi-agent systems with ZeroicAI. A comprehensive Rust framework featuring BDI cognitive architecture, FIPA-compliant messaging, swarm intelligence, and production-ready deployment for blockchain, trading, IoT, and enterprise automation.",
-              "url": "https://www.zeroicai.org/",
+              "url": "https://www.zeroicai.xyz/",
               "author": {
                 "@type": "Organization",
                 "name": "ZeroicAI Team"
@@ -148,8 +148,8 @@ export default function RootLayout({
               },
               "programmingLanguage": "Rust",
               "keywords": "Rust, multi-agent systems, agent-oriented programming, autonomous agents, BDI architecture, swarm intelligence, blockchain agents",
-              "image": "https://www.zeroicai.org/assets/ag-logo.png",
-              "screenshot": "https://www.zeroicai.org/assets/ag-logo.png"
+              "image": "https://www.zeroicai.xyz/assets/ag-logo.png",
+              "screenshot": "https://www.zeroicai.xyz/assets/ag-logo.png"
             })
           }}
         />
@@ -161,11 +161,11 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "ZeroicAI",
-              "url": "https://www.zeroicai.org/",
-              "logo": "https://www.zeroicai.org/assets/ag-logo.png",
+              "url": "https://www.zeroicai.xyz/",
+              "logo": "https://www.zeroicai.xyz/assets/ag-logo.png",
               "description": "Open-source Rust framework for building intelligent multi-agent systems",
               "sameAs": [
-                "https://x.com/tm401z",
+                "https://x.com/ZeroicAI",
                 "https://github.com/zeroicai"
               ]
             })

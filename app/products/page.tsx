@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Products",
   description: "Applications built with the ZeroicAI multi-agent framework.",
   alternates: {
-    canonical: "https://www.zeroicai.org/products",
+    canonical: "https://www.zeroicai.xyz/products",
   },
 };
 
