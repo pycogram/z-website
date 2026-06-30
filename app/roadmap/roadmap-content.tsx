@@ -17,71 +17,71 @@ const roadmapItems: RoadmapItem[] = [
     name: 'z-core',
     version: '0.1.0',
     status: 'done',
-    description: 'Core agent primitives and lifecycle management',
-    features: ['Agent trait', 'Derive macros', 'Lifecycle hooks', 'State management'],
+    description: 'Agent trait, AgentId, AgentContext, AgentState machine, and AgentResult. The foundation every other crate builds on.',
+    features: ['Agent trait', 'AgentId (UUID)', 'AgentContext', 'AgentState machine'],
   },
   {
     name: 'z-messaging',
     version: '0.1.0',
     status: 'done',
-    description: 'Type-safe async message passing',
-    features: ['Typed channels', 'Address system', 'Async/await', 'Serialization'],
-  },
-  {
-    name: 'z-macros',
-    version: '0.1.0',
-    status: 'done',
-    description: 'Procedural macros for ergonomic APIs',
-    features: ['Agent derive', 'Message derive', 'Handler macros'],
+    description: 'Async message passing with a typed Router, bounded Mailboxes, and 11 FIPA ACL performatives.',
+    features: ['Router', 'Mailbox', 'FIPA performatives', 'RequestReply protocol'],
   },
   {
     name: 'z-cognition',
     version: '0.1.0-beta',
-    status: 'in-progress',
-    description: 'BDI cognitive architecture',
-    features: ['Beliefs', 'Desires', 'Intentions', 'Plan library', 'Goal reasoning'],
+    status: 'done',
+    description: 'Full BDI cognitive architecture: BeliefBase, forward-chaining ReasoningEngine, BFS STRIPS Planner, UtilityFunction, and IntentionStack.',
+    features: ['BeliefBase', 'ReasoningEngine', 'STRIPS Planner', 'BDI deliberation'],
   },
   {
     name: 'z-patterns',
     version: '0.1.0-beta',
-    status: 'in-progress',
-    description: 'Organizational patterns for multi-agent coordination',
-    features: ['Hierarchy', 'Swarm', 'Market', 'Coalition', 'Holarchy', 'Federation', 'Blackboard', 'Team'],
+    status: 'done',
+    description: '8 organizational patterns for multi-agent coordination, each with a spawn_agents() bridge to z-runtime.',
+    features: ['Swarm', 'Hierarchy', 'Market', 'Federation', 'Coalition', 'Blackboard', 'Team', 'Holarchy'],
   },
   {
     name: 'z-runtime',
+    version: '0.1.0-beta',
+    status: 'done',
+    description: 'Async execution engine on Tokio. Supervised lifecycle, circuit breaker, scheduler, metrics registry, and agent sandbox — running in production.',
+    features: ['Supervisor', 'CircuitBreaker', 'Scheduler', 'MetricsRegistry', 'Sandbox'],
+  },
+  {
+    name: 'zeroicai',
     version: '0.1.0',
-    status: 'planned',
-    description: 'Async execution engine with supervision',
-    features: ['Tokio integration', 'Supervision trees', 'Fault tolerance', 'Scheduling'],
+    status: 'done',
+    description: 'Facade crate that re-exports all five core crates as a single dependency.',
+    features: ['Re-exports all crates', 'Prelude module', 'Single dependency'],
+  },
+  {
+    name: 'z-xbot',
+    version: '0.1.0',
+    status: 'done',
+    description: 'Live X/Twitter agent built on the framework — posts scheduled content, replies to mentions using BDI reasoning. First production ZeroicAI application.',
+    features: ['CognitiveAgent', 'BeliefBase', 'Cron scheduler', 'Live on X'],
+  },
+  {
+    name: 'z-examples',
+    version: '0.1.0',
+    status: 'done',
+    description: 'Runnable examples covering all 5 crates and all 8 patterns. Each example is a complete working program.',
+    features: ['hello_agent', 'cognitive_agent', 'market_pattern', 'full_system'],
   },
   {
     name: 'z-deploy',
-    version: '0.1.0',
+    version: '0.2.0',
     status: 'planned',
-    description: 'Deployment and orchestration tools',
-    features: ['Docker support', 'Kubernetes operators', 'Monitoring', 'Distributed deployment'],
+    description: 'Deployment CLI and utilities for containerizing and scaling ZeroicAI agent systems in production.',
+    features: ['Docker', 'Railway', 'Monitoring', 'CLI tooling'],
   },
   {
     name: 'z-tools',
-    version: '0.1.0',
+    version: '0.2.0',
     status: 'planned',
-    description: 'Development and debugging utilities',
-    features: ['Visual debugger', 'Message inspector', 'Performance profiler', 'Test harness'],
-  },
-  {
-    name: 'z-storage',
-    version: '0.1.0',
-    status: 'planned',
-    description: 'Persistence and state management',
-    features: ['Agent state persistence', 'Event sourcing', 'Snapshot support'],
-  },
-  {
-    name: 'z-network',
-    version: '0.1.0',
-    status: 'planned',
-    description: 'Distributed agent networking',
-    features: ['Remote messaging', 'Discovery', 'Clustering', 'P2P support'],
+    description: 'Development and debugging utilities: message inspector, agent visualizer, and test harness.',
+    features: ['Message inspector', 'Agent visualizer', 'Test harness', 'Benchmarks'],
   },
 ];
 
@@ -98,7 +98,7 @@ export default function Roadmap() {
 
   return (
     <Layout>
-      <div className="min-h-screen">
+      <div>
         {/* Breadcrumb */}
         <div className="border-b bg-muted/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -219,7 +219,7 @@ export default function Roadmap() {
             <p className="text-muted-foreground mb-4">
               Want to contribute to the roadmap? We welcome contributions!
             </p>
-            <a href="https://github.com/zeroicai" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/ZeroicAI" target="_blank" rel="noopener noreferrer">
               <Button variant="outline">
                 <ExternalLink className="mr-2 h-4 w-4" />
                 Contribute on GitHub
