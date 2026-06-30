@@ -4,7 +4,7 @@ import Roadmap from "./roadmap-content";
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: "https://www.zeroicai.org/roadmap",
+    canonical: "https://www.zeroicai.xyz/roadmap",
   },
 };
 
