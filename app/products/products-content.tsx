@@ -16,7 +16,7 @@ const products = [
     color: "text-green-400",
     bg: "bg-green-400/10",
     border: "border-green-400/20",
-    url: "https://cortex.zeroicai.org",
+    url: "https://cortex.zeroicai.xyz",
     status: "soon",
   },
   {
@@ -28,7 +28,7 @@ const products = [
     color: "text-orange-400",
     bg: "bg-orange-400/10",
     border: "border-orange-400/20",
-    url: "https://arena.zeroicai.org",
+    url: "https://arena.zeroicai.xyz",
     status: "soon",
   },
   {
@@ -40,7 +40,7 @@ const products = [
     color: "text-cyan-400",
     bg: "bg-cyan-400/10",
     border: "border-cyan-400/20",
-    url: "https://recall.zeroicai.org",
+    url: "https://recall.zeroicai.xyz",
     status: "soon",
   },
   {
@@ -52,7 +52,7 @@ const products = [
     color: "text-blue-400",
     bg: "bg-blue-400/10",
     border: "border-blue-400/20",
-    url: "https://xbot.zeroicai.org",
+    url: "https://xbot.zeroicai.xyz",
     status: "active",
   },
 ];
