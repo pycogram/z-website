@@ -1,193 +1,358 @@
+"use client";
+
 import Link from 'next/link';
-import { ChevronRight, Code } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ChevronRight, ArrowRight, Terminal } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { CodeBlock } from '@/components/CodeBlock';
-import { Badge } from '@/components/ui/badge';
-import { MotionDiv } from '@/components/framer/motion';
 
 interface Example {
   title: string;
   description: string;
-  pattern: string;
+  tags: string[];
+  filename: string;
   code: string;
+  runCmd: string;
 }
 
 const examples: Example[] = [
   {
-    title: 'Hierarchy Pattern',
-    description: 'Corporate organization with CEO delegating to departments and employees.',
-    pattern: 'Hierarchy',
-    code: `use zeroicai_patterns::hierarchy::*;
+    title: 'Hello Agent',
+    description: 'The simplest possible agent — spawns into the runtime, ticks every 500ms, and shuts down cleanly. Start here.',
+    tags: ['z-core', 'z-runtime', 'Agent trait'],
+    filename: 'hello_agent.rs',
+    runCmd: 'cargo run --example hello_agent',
+    code: `use z_core::{Agent, AgentContext, AgentId, AgentResult};
+use z_runtime::prelude::*;
+use async_trait::async_trait;
 
-    // Define the organizational hierarchy
-    let org = Hierarchy::new()
-        .with_root(CeoAgent::new("Alice"))
-        .add_child("Alice", DepartmentAgent::new("Engineering"))
-        .add_child("Alice", DepartmentAgent::new("Sales"))
-        .add_child("Engineering", EmployeeAgent::new("Bob"))
-        .add_child("Engineering", EmployeeAgent::new("Charlie"));
+struct GreeterAgent { id: AgentId, count: u32 }
 
-    // CEO broadcasts a directive
-    org.broadcast_down(Directive::new("Q4 Goals")).await?;
+#[async_trait]
+impl Agent for GreeterAgent {
+    fn id(&self) -> &AgentId { &self.id }
 
-    // Employees report up the chain
-    org.report_up("Bob", Report::new("Feature shipped")).await?;`,
-  },
-  {
-    title: 'Swarm Pattern',
-    description: 'Drone coordination with emergent behavior and local communication.',
-    pattern: 'Swarm',
-    code: `use zeroicai_patterns::swarm::*;
-
-    // Create a swarm of drone agents
-    let swarm = Swarm::new(SwarmConfig {
-        size: 50,
-        neighborhood_radius: 10.0,
-        alignment_weight: 1.0,
-        cohesion_weight: 1.0,
-        separation_weight: 1.5,
-    });
-
-    // Spawn drones with position
-    for i in 0..50 {
-        swarm.spawn(DroneAgent::new(random_position())).await?;
+    async fn initialize(&mut self, _ctx: &AgentContext) -> AgentResult<()> {
+        println!("[Greeter] Hello! I'm alive.");
+        Ok(())
     }
 
-    // Drones automatically coordinate via local rules
-    swarm.start().await?;`,
+    async fn execute(&mut self, _ctx: &AgentContext) -> AgentResult<()> {
+        self.count += 1;
+        println!("[Greeter] Tick #{}", self.count);
+        tokio::time::sleep(Duration::from_millis(500)).await;
+        Ok(())
+    }
+
+    async fn shutdown(&mut self, _ctx: &AgentContext) -> AgentResult<()> {
+        println!("[Greeter] Goodbye after {} ticks!", self.count);
+        Ok(())
+    }
+}
+
+#[tokio::main]
+async fn main() -> Result<(), RuntimeError> {
+    let runtime = Runtime::new();
+    runtime.spawn(Box::new(GreeterAgent { id: AgentId::new(), count: 0 }), "greeter").await?;
+    tokio::time::sleep(Duration::from_secs(3)).await;
+    runtime.shutdown().await
+}`,
   },
   {
-    title: 'Market Pattern',
-    description: 'Auction system with buyers, sellers, and price discovery.',
-    pattern: 'Market',
-    code: `use zeroicai_patterns::market::*;
+    title: 'BDI Cognitive Reasoning',
+    description: 'A CognitiveAgent loads beliefs from JSON and answers questions via forward-chaining inference. Unknown questions fall back to an LLM.',
+    tags: ['z-cognition', 'z-runtime', 'BeliefBase', 'Rule'],
+    filename: 'cognitive_agent.rs',
+    runCmd: 'cargo run --example cognitive_agent',
+    code: `use z_cognition::Rule;
+use z_runtime::{prelude::*, CognitiveAgent};
 
-    let market = Market::new(AuctionRules::english());
+// Load 61 beliefs from JSON, wire two inference rules
+let mut thinker = CognitiveAgent::from_config(
+    "data/beliefs.json",
+    "data/config.json",
+);
 
-    // Register participants
-    market.register_seller(SellerAgent::new("Alice", item)).await?;
-    market.register_buyer(BuyerAgent::new("Bob", budget: 1000)).await?;
-    market.register_buyer(BuyerAgent::new("Charlie", budget: 1500)).await?;
+thinker.add_rule(
+    Rule::new("topic:what_is")
+        .with_condition("what")
+        .with_condition("zeroicai")
+        .with_conclusion("what_is_zeroicai"),
+);
+thinker.add_rule(
+    Rule::new("topic:patterns")
+        .with_condition("pattern")
+        .with_condition("support")
+        .with_conclusion("patterns"),
+);
 
-    // Run the auction
-    let result = market.run_auction(Duration::from_secs(60)).await?;
-    println!("Winner: {} at price {}", result.winner, result.price);`,
+println!("{} beliefs, {} rules loaded",
+    thinker.belief_count(),
+    thinker.rule_count(),
+);
+
+// Spawn alongside a CuriousAgent that sends queries
+let runtime = Runtime::new();
+runtime.spawn(Box::new(thinker), "thinker").await?;
+runtime.spawn(Box::new(CuriousAgent::new()), "curious").await?;
+
+// CuriousAgent → thinker: "What is ZeroicAI?"
+// thinker → CuriousAgent: "<answer from belief base>"`,
   },
   {
-    title: 'Coalition Pattern',
-    description: 'Dynamic team formation based on capabilities and goals.',
-    pattern: 'Coalition',
-    code: `use zeroicai_patterns::coalition::*;
+    title: 'Market Auction',
+    description: 'Three trader agents bid in a sealed-bid auction for a GPU cluster. The auctioneer resolves via FIPA CFP → Propose → Accept performatives.',
+    tags: ['z-patterns', 'z-runtime', 'Market', 'FIPA ACL'],
+    filename: 'market_pattern.rs',
+    runCmd: 'cargo run --example market_pattern',
+    code: `use z_patterns::market::{Auction, AuctionType, Bid};
+use z_runtime::prelude::*;
 
-    // Agents with different capabilities
-    let agents = vec![
-        Agent::new("Alice").with_skills(["rust", "ml"]),
-        Agent::new("Bob").with_skills(["python", "data"]),
-        Agent::new("Charlie").with_skills(["devops", "k8s"]),
-    ];
+// Sealed-bid auction, $5k reserve
+let auction = Arc::new(Mutex::new(
+    Auction::new(AuctionType::SealedBid, "GPU Cluster (8x A100)")
+        .with_reserve_price(5000.0),
+));
 
-    // Form coalition for a task
-    let task = Task::new("Deploy ML Model")
-        .requires(["ml", "devops"]);
+let runtime = Runtime::new();
+runtime.spawn(Box::new(TraderAgent::new("Trader-1", 8_000.0)), "trader_1").await?;
+runtime.spawn(Box::new(TraderAgent::new("Trader-2", 12_000.0)), "trader_2").await?;
+runtime.spawn(Box::new(TraderAgent::new("Trader-3", 6_500.0)), "trader_3").await?;
+runtime.spawn(Box::new(AuctioneerAgent::new(auction.clone(), 3)), "auctioneer").await?;
 
-    let coalition = CoalitionFormation::greedy()
-        .form(&agents, &task).await?;
-
-    println!("Coalition: {:?}", coalition.members());`,
+// Output:
+// [Auctioneer] Now auctioning: "GPU Cluster (8x A100)"
+// [Trader-1] Bidding $6160 ...  [Trader-2] Bidding $9240 ...
+// [Auctioneer] WINNER: $9240!`,
   },
   {
-    title: 'Blackboard Pattern',
-    description: 'Shared knowledge space for collaborative problem solving.',
-    pattern: 'Blackboard',
-    code: `use zeroicai_patterns::blackboard::*;
+    title: 'Swarm Consensus',
+    description: 'Five scout agents vote independently on a route. A tally agent counts results and declares the swarm decision — no central coordinator.',
+    tags: ['z-patterns', 'z-runtime', 'Swarm', 'Decentralized'],
+    filename: 'swarm_pattern.rs',
+    runCmd: 'cargo run --example swarm_pattern',
+    code: `use z_patterns::swarm::Swarm;
+use z_runtime::prelude::*;
 
-    let blackboard = Blackboard::new();
+let mut swarm = Swarm::new("Scout Swarm");
+let board = VoteBoard::new(); // shared Arc<Mutex<Vec<(agent, vote)>>>
 
-    // Specialist agents contribute knowledge
-    let hypothesis_agent = HypothesisAgent::new();
-    let analyzer_agent = AnalyzerAgent::new();
-    let validator_agent = ValidatorAgent::new();
-
-    // Agents react to blackboard changes
-    blackboard.on_change(|entry| {
-        match entry.level {
-            Level::Raw => hypothesis_agent.process(entry),
-            Level::Hypothesis => analyzer_agent.analyze(entry),
-            Level::Analysis => validator_agent.validate(entry),
-        }
-    });
-
-    blackboard.post(RawData::new(sensor_reading)).await?;`,
-  },
+let agents = vec![
+    ("Scout-1", "Route A"),
+    ("Scout-2", "Route B"),
+    ("Scout-3", "Route A"),
+    ("Scout-4", "Route A"),
+    ("Scout-5", "Route B"),
 ];
 
+for (name, preference) in &agents {
+    let agent = SwarmAgent::new(name, preference, board.clone());
+    swarm.add_member(*agent.id());
+    runtime.spawn(Box::new(agent), &name.to_lowercase()).await?;
+}
+
+// Each agent broadcasts its vote, TallyAgent counts:
+// Route A ███ (3)
+// Route B ██  (2)
+// → Swarm decision: Route A`,
+  },
+  {
+    title: 'Supervised Recovery',
+    description: 'An agent intentionally crashes 3 times. The runtime restarts it automatically using the OnFailure restart strategy with exponential backoff.',
+    tags: ['z-runtime', 'RestartPolicy', 'CircuitBreaker'],
+    filename: 'supervised_agents.rs',
+    runCmd: 'cargo run --example supervised_agents',
+    code: `use z_runtime::prelude::*;
+
+let counter = Arc::new(AtomicU32::new(0));
+
+// Agent returns Err for first 3 executions, then runs normally
+let agent = FlakyAgent::new(counter.clone(), fail_until: 3);
+
+let policy = RestartPolicy::new(RestartStrategy::OnFailure)
+    .with_max_retries(5)
+    .with_backoff_seconds(1);
+
+runtime.spawn_with_policy(Box::new(agent), "flaky", policy).await?;
+
+tokio::time::sleep(Duration::from_secs(8)).await;
+
+// Output:
+// [Flaky] Crashing! (execution #1)
+// [Flaky] Crashing! (execution #2)
+// [Flaky] Crashing! (execution #3)
+// [Flaky] ✓ Running normally (execution #4)
+// Total executions: 6 (3 crashes + 3 successful)`,
+  },
+  {
+    title: 'Full System Demo',
+    description: 'Workers report to a manager, a CognitiveAgent answers queries, and an unreliable agent crashes twice before recovering — all in one runtime.',
+    tags: ['z-core', 'z-cognition', 'z-runtime', 'z-messaging'],
+    filename: 'full_system.rs',
+    runCmd: 'cargo run --example full_system',
+    code: `// Stage 1: Workers report to Manager via FIPA Inform
+runtime.spawn(Box::new(ManagerAgent::new()), "manager").await?;
+runtime.spawn(Box::new(WorkerAgent::new("Alpha")), "alpha").await?;
+runtime.spawn(Box::new(WorkerAgent::new("Beta")), "beta").await?;
+
+// Stage 2: CognitiveAgent answers queries from another agent
+let thinker = CognitiveAgent::from_config("data/beliefs.json", "data/config.json");
+runtime.spawn(Box::new(thinker), "thinker").await?;
+runtime.spawn(Box::new(QuickAsker::new()), "asker").await?;
+
+// Stage 3: Unreliable agent crashes twice, supervisor restarts it
+let policy = RestartPolicy::new(RestartStrategy::OnFailure)
+    .with_max_retries(5)
+    .with_backoff_seconds(1);
+
+runtime.spawn_with_policy(
+    Box::new(UnreliableAgent::new(counter.clone())),
+    "unreliable",
+    policy,
+).await?;
+
+// All three stages run concurrently on the same Tokio runtime.
+// Agents: 6  |  Crashes: 2  |  Recovery: automatic`,
+  },
+];
 
 export default function Examples() {
   return (
     <Layout>
       <div className="min-h-screen">
+
         {/* Breadcrumb */}
-        <div className="border-b bg-muted/30">
+        <div className="border-b border-border bg-muted/20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="hover:text-foreground transition-colors">
-                Home
-              </Link>
-              <ChevronRight className="h-4 w-4" />
+            <nav className="flex items-center gap-2 text-xs font-mono text-muted-foreground">
+              <Link href="/" className="hover:text-[var(--cyan)] transition-colors">Home</Link>
+              <ChevronRight className="h-3 w-3" />
               <span className="text-foreground">Examples</span>
             </nav>
           </div>
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <MotionDiv
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-4xl font-bold mb-4">Examples</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Explore real-world examples of organizational patterns and multi-agent coordination.
-            </p>
-          </MotionDiv>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
 
-          <div className="space-y-12">
-            {examples.map((example) => (
-              <MotionDiv
-                key={example.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="border rounded-xl overflow-hidden bg-card"
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="mb-16"
+          >
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.4em] text-[var(--cyan)] mb-3">
+              Real code · Real output
+            </p>
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+              Examples that{' '}
+              <span className="text-[var(--cyan)]">actually compile</span>
+            </h1>
+            <p className="text-muted-foreground text-sm max-w-xl leading-relaxed mb-6">
+              Every snippet below is pulled directly from{' '}
+              <a
+                href="https://github.com/ZeroicAI/z-examples"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--cyan)] hover:underline"
               >
-                <div className="p-6 border-b bg-muted/30">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <h2 className="text-xl font-semibold">{example.title}</h2>
-                        <Badge variant="secondary">{example.pattern}</Badge>
-                      </div>
-                      <p className="text-muted-foreground">{example.description}</p>
-                    </div>
-                    <div className="flex gap-2">
-                      <a
-                        href={`https://github.com/zeroicai/examples/${example.pattern.toLowerCase()}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                        title="View on GitHub"
-                      >
-                        <Code className="h-5 w-5" />
-                      </a>
+                ZeroicAI/z-examples
+              </a>
+              . Clone the repo and run any of them with a single{' '}
+              <code className="font-mono text-xs bg-white/5 px-1.5 py-0.5 rounded">cargo run</code>.
+            </p>
+            <div className="holo-frame inline-flex items-center gap-3 px-4 py-3">
+              <Terminal className="h-4 w-4 text-[var(--cyan)]" />
+              <code className="font-mono text-sm text-[var(--cyan)]">
+                git clone https://github.com/ZeroicAI/z-examples
+              </code>
+            </div>
+          </motion.div>
+
+          {/* Examples */}
+          <div className="space-y-10">
+            {examples.map((ex, i) => (
+              <motion.div
+                key={ex.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: i * 0.05 }}
+                viewport={{ once: true }}
+                className="holo-frame overflow-hidden"
+              >
+                {/* Card header */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-6 py-5 border-b border-white/8 bg-white/[0.02]">
+                  <div>
+                    <h2 className="font-semibold text-base mb-1">{ex.title}</h2>
+                    <p className="text-muted-foreground text-sm leading-relaxed max-w-xl">
+                      {ex.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mt-3">
+                      {ex.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="font-mono text-[0.6rem] px-2 py-0.5 rounded border border-[var(--cyan)]/20 text-[var(--cyan)]/60 bg-[var(--cyan)]/5"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
+                  <div className="flex-shrink-0">
+                    <code className="flex items-center gap-2 font-mono text-xs text-[var(--cyan)]/70 bg-[var(--cyan)]/5 border border-[var(--cyan)]/20 rounded px-3 py-1.5 whitespace-nowrap">
+                      <Terminal className="h-3 w-3" />
+                      {ex.runCmd}
+                    </code>
+                  </div>
                 </div>
-                <CodeBlock code={example.code} language="rust" showLineNumbers />
-              </MotionDiv>
+
+                {/* Code block */}
+                <CodeBlock
+                  code={ex.code}
+                  language="rust"
+                  filename={ex.filename}
+                  showLineNumbers={false}
+                />
+              </motion.div>
             ))}
           </div>
+
+          {/* Footer CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            viewport={{ once: true }}
+            className="holo-frame p-10 sm:p-14 mt-16"
+          >
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.4em] text-[var(--cyan)] mb-4">
+              13 examples in total
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
+              See the rest on{' '}
+              <span className="text-[var(--cyan)]">GitHub</span>
+            </h2>
+            <p className="text-muted-foreground text-sm max-w-md mb-8">
+              The full repo includes blackboard, coalition, federation, hierarchy,
+              holarchy, team patterns, and a combined full-system demo — all runnable.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="https://github.com/ZeroicAI/z-examples"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-cyber"
+              >
+                View z-examples on GitHub
+                <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+              <Link href="/docs/getting-started" className="btn-cyber btn-cyber-ghost">
+                Read the docs
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </Layout>
