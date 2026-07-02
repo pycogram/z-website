@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 
 const DEMO_LINES = [
   { text: '╔══════════════════════════════════════════════════╗', delay: 0,    color: 'text-cyan-400' },
-  { text: '║  ZeroicAI × Solana — Autonomous Trading Swarm  ║', delay: 80,   color: 'text-cyan-400' },
+  { text: '║  ZeroicAI × Solana - Autonomous Trading Swarm  ║', delay: 80,   color: 'text-cyan-400' },
   { text: '║  6 agents · BDI reasoning · Supervision         ║', delay: 160,  color: 'text-cyan-400' },
   { text: '╚══════════════════════════════════════════════════╝', delay: 240,  color: 'text-cyan-400' },
   { text: '', delay: 320, color: '' },
@@ -22,8 +22,8 @@ const DEMO_LINES = [
   { text: '', delay: 850, color: '' },
   { text: '━━━ Round 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', delay: 950,  color: 'text-zinc-500' },
   { text: '  [PriceOracle]  SOL/USDC: $142.50  (+0.00%)', delay: 1050, color: 'text-zinc-300' },
-  { text: '  [TraderGamma]  ⚡ Crash #1 — Supervisor restarting...', delay: 1200, color: 'text-amber-400' },
-  { text: '  [TraderGamma]  ⚡ Crash #2 — Supervisor restarting...', delay: 1500, color: 'text-amber-400' },
+  { text: '  [TraderGamma]  ⚡ Crash #1 - Supervisor restarting...', delay: 1200, color: 'text-amber-400' },
+  { text: '  [TraderGamma]  ⚡ Crash #2 - Supervisor restarting...', delay: 1500, color: 'text-amber-400' },
   { text: '', delay: 1700, color: '' },
   { text: '━━━ Round 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', delay: 1800, color: 'text-zinc-500' },
   { text: '  [PriceOracle]  SOL/USDC: $145.20  (+1.89%)', delay: 1900, color: 'text-zinc-300' },
@@ -36,7 +36,7 @@ const DEMO_LINES = [
   { text: '  [PriceOracle]  SOL/USDC: $143.80  (-0.96%)', delay: 2900, color: 'text-zinc-300' },
   { text: '  [TraderAlpha]  sol_price=145.20  →  HOLD (target $144.00)', delay: 3050, color: 'text-zinc-400' },
   { text: '  [TraderBeta]   sol_price=145.20  →  BUY  @ $146.57', delay: 3200, color: 'text-emerald-400' },
-  { text: '  [TraderGamma]  ✓ Recovered after 2 crash(es) — running stable', delay: 3400, color: 'text-emerald-500' },
+  { text: '  [TraderGamma]  ✓ Recovered after 2 crash(es) - running stable', delay: 3400, color: 'text-emerald-500' },
   { text: '  [RiskMonitor]  trend=BEARISH ↓', delay: 3600, color: 'text-blue-400' },
   { text: '  [Auctioneer]   ✓ Accept → TraderBeta wins @ $146.57', delay: 3800, color: 'text-cyan-400' },
   { text: '', delay: 3950, color: '' },
@@ -90,7 +90,7 @@ function AnimatedTerminal() {
         <div className="h-3 w-3 rounded-full bg-yellow-500/70" />
         <div className="h-3 w-3 rounded-full bg-emerald-500/70" />
         <span className="ml-3 text-xs text-zinc-500 font-mono">
-          z-examples — cargo run --example solana_swarm
+          z-examples - cargo run --example solana_swarm
         </span>
         {!started && (
           <button
@@ -132,7 +132,7 @@ const useCases = [
   {
     icon: TrendingUp,
     title: 'DeFi Trading Bots',
-    description: 'Deploy a swarm of trader agents that watch on-chain prices, deliberate with BDI reasoning, and submit sealed bids in a coordinated auction — all in Rust. No Python glue, no race conditions.',
+    description: 'Deploy a swarm of trader agents that watch on-chain prices, deliberate with BDI reasoning, and submit sealed bids in a coordinated auction - all in Rust. No Python glue, no race conditions.',
     tags: ['BDI reasoning', 'Market pattern', 'Sealed-bid auction'],
     example: 'solana_swarm',
   },
@@ -222,12 +222,12 @@ export default function SolanaPage() {
               Built for Solana builders
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight">
-              Autonomous agents for Solana —{' '}
+              Autonomous agents for Solana {' '}
               <span className="text-primary">in Rust</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
               ZeroicAI lets you build trading bots, MEV agents, and self-healing infrastructure
-              as a swarm of autonomous Rust programs that coordinate, reason, and recover — without a central controller.
+              as a swarm of autonomous Rust programs that coordinate, reason, and recover - without a central controller.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a href="https://github.com/ZeroicAI/z-examples" target="_blank" rel="noopener noreferrer">
@@ -252,7 +252,7 @@ export default function SolanaPage() {
           >
             <AnimatedTerminal />
             <p className="text-center text-xs text-muted-foreground mt-3">
-              Live demo — watch 6 autonomous agents coordinate a SOL/USDC trading session.
+              Live demo - watch 6 autonomous agents coordinate a SOL/USDC trading session.
               TraderGamma crashes twice and recovers on its own.
             </p>
           </motion.div>
@@ -263,13 +263,13 @@ export default function SolanaPage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-xl font-semibold mb-6 text-center text-muted-foreground">
-                What you just saw — explained
+                What you just saw - explained
               </h2>
               <div className="grid sm:grid-cols-3 gap-6 text-sm">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary mb-1">6</div>
                   <div className="font-medium mb-1">Autonomous agents</div>
-                  <div className="text-muted-foreground">PriceOracle · 3 Traders · RiskMonitor · Auctioneer — each running independently</div>
+                  <div className="text-muted-foreground">PriceOracle · 3 Traders · RiskMonitor · Auctioneer - each running independently</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary mb-1">BDI</div>
@@ -343,7 +343,7 @@ export default function SolanaPage() {
         {/* BDI code snippet */}
         <section className="border-t bg-muted/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div className="max-w-4xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-4xl mx-auto grid lg:grid-cols-2 gap-12 items-center min-w-0">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -356,11 +356,11 @@ export default function SolanaPage() {
                 <p className="text-muted-foreground mb-6">
                   Each trader has a <strong>BeliefBase</strong> (what it knows), a <strong>Desire</strong> (profit),
                   and derives an <strong>Intention</strong> every tick. This is the Beliefs-Desires-Intentions
-                  model from cognitive science — running in your Rust binary.
+                  model from cognitive science - running in your Rust binary.
                 </p>
                 <p className="text-muted-foreground mb-6">
                   Agents don't need a database or LLM for simple reasoning. The BDI engine
-                  is deterministic and fast — ideal for latency-sensitive trading.
+                  is deterministic and fast - ideal for latency-sensitive trading.
                 </p>
                 <Link href="/docs/getting-started">
                   <Button variant="outline" size="sm">
@@ -374,15 +374,16 @@ export default function SolanaPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
+                className="min-w-0"
               >
-                <div className="rounded-xl border border-zinc-700 bg-zinc-950 overflow-hidden">
+                <div className="rounded-xl border border-zinc-700 bg-zinc-950 overflow-hidden w-full">
                   <div className="flex items-center gap-2 px-4 py-2.5 border-b border-zinc-800 bg-zinc-900">
                     <div className="h-2.5 w-2.5 rounded-full bg-red-500/60" />
                     <div className="h-2.5 w-2.5 rounded-full bg-yellow-500/60" />
                     <div className="h-2.5 w-2.5 rounded-full bg-emerald-500/60" />
                     <span className="ml-2 text-xs text-zinc-500 font-mono">trader_agent.rs</span>
                   </div>
-                  <pre className="p-4 text-xs sm:text-sm font-mono overflow-x-auto leading-relaxed">
+                  <pre className="p-4 text-xs sm:text-sm font-mono overflow-x-auto leading-relaxed w-full">
                     <code>
                       {traderSnippet.split('\n').map((line, i) => {
                         const isComment = line.trim().startsWith('//');
@@ -450,7 +451,7 @@ export default function SolanaPage() {
               <h2 className="text-3xl font-bold mb-4">Ready to build?</h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
                 Clone z-examples and run the trading swarm demo in under 2 minutes.
-                No API keys, no config — just Rust and Cargo.
+                No API keys, no config - just Rust and Cargo.
               </p>
               <div className="bg-zinc-950 border border-zinc-800 rounded-lg inline-block px-6 py-3 font-mono text-sm text-emerald-400 mb-8">
                 cargo run --example solana_swarm
