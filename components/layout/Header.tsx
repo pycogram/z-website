@@ -14,6 +14,7 @@ const navItems = [
   { label: 'Examples', href: '/examples' },
   { label: 'Use Cases', href: '/use-cases' },
   { label: 'Roadmap', href: '/roadmap' },
+  { label: '◎ Solana', href: '/solana', highlight: true },
 ];
 
 export function Header() {
@@ -65,7 +66,11 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`nav-link px-3 py-2 ${isActive(item.href) ? 'active' : ''}`}
+                className={
+                  item.highlight
+                    ? `nav-link px-3 py-2 text-[var(--cyan)] font-semibold ${isActive(item.href) ? 'active' : ''}`
+                    : `nav-link px-3 py-2 ${isActive(item.href) ? 'active' : ''}`
+                }
               >
                 {item.label}
               </Link>
@@ -120,7 +125,7 @@ export function Header() {
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block px-4 py-2.5 font-display text-[0.65rem] uppercase tracking-widest transition-colors ${
-                    isActive(item.href)
+                    isActive(item.href) || item.highlight
                       ? 'text-[var(--cyan)]'
                       : 'text-muted-foreground hover:text-[var(--cyan)]'
                   }`}
