@@ -145,14 +145,22 @@ export default function Home() {
     <Layout>
 
       {/* ── Hero ───────────────────────────────────────── */}
-      <section className="relative lg:min-h-screen flex items-center overflow-hidden w-full px-4 py-20 sm:py-24 lg:py-0">
+      <section className="-mt-16 relative lg:min-h-screen flex items-center overflow-hidden w-full px-4 pt-36 pb-20 sm:pt-40 sm:pb-24 lg:pt-0 lg:pb-0">
 
-        {/* Dot grid background */}
+        {/* Hero subtle grid */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          className="pointer-events-none absolute inset-0 opacity-[0.4]"
           style={{
-            backgroundImage: 'radial-gradient(circle, #88e4f8 1px, transparent 1px)',
-            backgroundSize: '32px 32px',
+            backgroundImage:
+              'linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+          }}
+        />
+        {/* Orange hero glow */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse 80% 50% at 50% -5%, rgba(232,71,28,0.12) 0%, transparent 65%)',
           }}
         />
 
@@ -208,6 +216,10 @@ export default function Home() {
             >
               <Link href="/docs/getting-started" className="btn-cyber">
                 Get Started
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+              <Link href="/chat" className="btn-cyber btn-cyber-ghost">
+                Chat with CognitiveAgent
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
               <a
@@ -366,8 +378,17 @@ export default function Home() {
       </section>
 
       {/* ── Quick Start ─────────────────────────────────── */}
-      <section className="py-24 border-t border-border">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-24 border-t border-border overflow-hidden">
+        {/* Grid background */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+          }}
+        />
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -521,32 +542,39 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             viewport={{ once: true }}
-            className="holo-frame p-10 sm:p-16"
+            className="relative overflow-hidden rounded-xl border border-white/10 p-12 sm:p-20 text-center"
+            style={{ background: 'hsl(var(--card))' }}
           >
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.4em] text-[var(--cyan)] mb-4">
-              Open Source · MIT / Apache-2.0
-            </p>
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight mb-4">
-              Ready to build{' '}
-              <span className="text-[var(--cyan)]">intelligent agents?</span>
-            </h2>
-            <p className="text-muted-foreground text-sm max-w-md mb-10">
-              Join the community building the future of multi-agent systems in Rust.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/docs/getting-started" className="btn-cyber">
-                Get Started
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-              <a
-                href="https://github.com/ZeroicAI"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-cyber btn-cyber-ghost"
-              >
-                Star on GitHub
-                <ArrowRight className="h-3.5 w-3.5" />
-              </a>
+            {/* Orange glow inside card */}
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background: 'radial-gradient(ellipse 60% 80% at 20% 60%, rgba(232,71,28,0.22) 0%, transparent 60%)',
+              }}
+            />
+
+            <div className="relative z-10">
+              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight mb-4">
+                Ready to Build Intelligent Agents?
+              </h2>
+              <p className="text-muted-foreground text-sm max-w-md mx-auto mb-10">
+                Join the community building the future of multi-agent systems in Rust. Open source, MIT/Apache-2.0 licensed.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/docs/getting-started" className="btn-cyber">
+                  Get Started
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <a
+                  href="https://github.com/ZeroicAI"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-cyber btn-cyber-ghost"
+                >
+                  Star on GitHub
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </a>
+              </div>
             </div>
           </motion.div>
         </div>

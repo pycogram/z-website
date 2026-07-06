@@ -17,9 +17,9 @@ export function FeatureCard({ icon: Icon, title, description, delay = 0 }: Featu
       viewport={{ once: true }}
       className="holo-frame feature-card group"
     >
-      <div className="h-10 w-10 flex items-center justify-center mb-4"
-        style={{ border: '1px solid rgba(136,228,248,0.25)', background: 'rgba(136,228,248,0.06)' }}>
-        <Icon className="h-5 w-5 text-[var(--cyan)]" style={{ filter: 'drop-shadow(0 0 4px var(--cyan))' }} />
+      <div className="h-10 w-10 flex items-center justify-center mb-4 rounded"
+        style={{ border: '1px solid rgba(232,71,28,0.3)', background: 'rgba(232,71,28,0.1)' }}>
+        <Icon className="h-5 w-5 text-[var(--cyan)]" />
       </div>
       <h3 className="font-display text-sm font-bold uppercase tracking-wider mb-2 text-foreground group-hover:text-[var(--cyan)] transition-colors">
         {title}

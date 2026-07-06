@@ -217,10 +217,6 @@ export default function SolanaPage() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
-              <Zap className="h-3.5 w-3.5" />
-              Built for Solana builders
-            </div>
             <h1 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight">
               Autonomous agents for Solana {' '}
               <span className="text-primary">in Rust</span>

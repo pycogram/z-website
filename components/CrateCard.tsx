@@ -29,8 +29,13 @@ export function CrateCard({ name, description, status, features, href, delay = 0
   const inner = (
     <>
       <div className="flex items-start justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <Package className="h-5 w-5 text-primary" />
+        <div className="flex items-center gap-2.5">
+          <div
+            className="h-8 w-8 flex items-center justify-center rounded"
+            style={{ background: 'rgba(232,71,28,0.15)', border: '1px solid rgba(232,71,28,0.25)' }}
+          >
+            <Package className="h-4 w-4 text-[var(--cyan)]" />
+          </div>
           <span className="font-mono font-semibold">{name}</span>
         </div>
         <span className={className}>{label}</span>
@@ -63,13 +68,13 @@ export function CrateCard({ name, description, status, features, href, delay = 0
       viewport={{ once: true }}
     >
       {isDisabled ? (
-        <div className={cn('feature-card block h-full opacity-50 cursor-default')}>{inner}</div>
+        <div className={cn('holo-frame feature-card block h-full opacity-50 cursor-default')}>{inner}</div>
       ) : isExternal ? (
-        <a href={href} target="_blank" rel="noopener noreferrer" className="feature-card block h-full">
+        <a href={href} target="_blank" rel="noopener noreferrer" className="holo-frame feature-card block h-full">
           {inner}
         </a>
       ) : (
-        <Link href={href} className="feature-card block h-full">
+        <Link href={href} className="holo-frame feature-card block h-full">
           {inner}
         </Link>
       )}

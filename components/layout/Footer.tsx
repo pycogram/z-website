@@ -17,8 +17,8 @@ const footerLinks = {
   community: [
     { label: 'GitHub', href: 'https://github.com/zeroicai', external: true },
     { label: 'Twitter / X', href: 'https://x.com/ZeroicAI', external: true },
+    { label: 'Telegram', href: 'https://t.me/ZeroicAI', external: true },
     { label: 'Contributing', href: '/#' },
-    { label: 'Code of Conduct', href: '/#' },
   ],
 };
 
@@ -26,7 +26,7 @@ export function Footer() {
   return (
     <footer
       className="border-t border-[var(--cyan)]/15 mt-auto"
-      style={{ background: 'rgba(5, 6, 18, 0.9)' }}
+      style={{ background: 'rgba(10, 11, 16, 0.97)' }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
@@ -35,12 +35,11 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-5 group w-fit">
               <Image
-                src="/assets/ag-logo.png"
+                src="/assets/logo-x.png"
                 alt="ZeroicAI"
                 width={28}
                 height={28}
-                className="opacity-75 group-hover:opacity-100 transition-opacity"
-                style={{ filter: 'invert(1) brightness(0.92)' }}
+                className="opacity-80 group-hover:opacity-100 transition-opacity"
               />
               <span className="font-display text-sm font-bold uppercase tracking-widest text-foreground group-hover:text-[var(--cyan)] transition-colors">
                 ZeroicAI
@@ -65,6 +64,14 @@ export function Footer() {
                 className="font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground hover:text-[var(--cyan)] transition-colors"
               >
                 X / Twitter ↗
+              </a>
+              <a
+                href="https://t.me/ZeroicAI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground hover:text-[var(--cyan)] transition-colors"
+              >
+                Telegram ↗
               </a>
             </div>
           </div>
@@ -139,9 +146,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div
-          className="mt-12 pt-6 border-t border-[var(--cyan)]/10 flex flex-col sm:flex-row justify-between items-center gap-4"
-        >
+        <div className="mt-12 pt-6 border-t border-[var(--cyan)]/10 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="terminal-text text-[0.6rem] uppercase tracking-widest opacity-50">
             © {new Date().getFullYear()} ZeroicAI — MIT / Apache-2.0
           </p>
