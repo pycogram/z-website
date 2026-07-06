@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { GlobalEffects } from "@/components/effects/GlobalEffects";
+import { SplashLayout } from "@/components/SplashLayout";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -175,7 +176,7 @@ export default function RootLayout({
       <body className="antialiased">
         <ThemeProvider defaultTheme="dark" storageKey="zeroicai-theme">
           <GlobalEffects />
-          {children}
+          <SplashLayout>{children}</SplashLayout>
         </ThemeProvider>
       </body>
     </html>
