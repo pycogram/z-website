@@ -3,22 +3,22 @@ import Image from 'next/image';
 
 const footerLinks = {
   documentation: [
-    { label: 'Getting Started', href: '/docs/getting-started' },
-    { label: 'Architecture', href: '/docs#' },
-    { label: 'API Reference', href: '/docs/#' },
+    { label: 'Getting Started', href: '/docs' },
+    { label: 'Architecture', href: '/docs' },
+    { label: 'API Reference', href: '/docs' },
     { label: 'Examples', href: '/examples' },
   ],
   crates: [
-    { label: 'z-core', href: '/crates/#' },
-    { label: 'z-messaging', href: '/crates/#' },
-    { label: 'z-cognition', href: '/crates/#' },
-    { label: 'z-patterns', href: '/crates/#' },
+    { label: 'z-core', href: '/crates' },
+    { label: 'z-messaging', href: '/crates' },
+    { label: 'z-cognition', href: '/crates' },
+    { label: 'z-patterns', href: '/crates' },
   ],
   community: [
     { label: 'GitHub', href: 'https://github.com/zeroicai', external: true },
     { label: 'Twitter / X', href: 'https://x.com/ZeroicAI', external: true },
     { label: 'Telegram', href: 'https://t.me/ZeroicAI', external: true },
-    { label: 'Contributing', href: '/#' },
+    { label: 'Contributing', href: 'https://github.com/zeroicai', external: true },
   ],
 };
 
